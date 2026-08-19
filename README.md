@@ -10,20 +10,26 @@ de comentarios y descarga del paquete de archivos.
 
 ## Publicar cambios (flujo actual)
 
-Todo va directo a producción, sin ramas ni staging.
+Todo va directo a producción, sin ramas ni staging. **Con hacer push basta:**
 
 ```bash
-git add -A && git commit -m "lo que cambiaste" && bash deploy.sh
+git add -A && git commit -m "lo que cambiaste" && git push
 ```
 
-En VS Code también está como tarea: `Cmd+Shift+P` → **Tasks: Run Task** →
-*Publicar a producción* (o `Cmd+Shift+B`, que la ejecuta directo).
+GitHub Actions publica solo en ~10 segundos. El avance se ve en la pestaña
+**Actions** del repo, y `version.txt` en producción dice qué versión está viva:
+https://www.commandigital.biz/share/swarovski/version.txt
 
-Para ver qué subiría sin tocar el servidor:
+### Plan B: publicar sin GitHub
+
+Si Actions falla o necesitas subir algo urgente:
 
 ```bash
-bash deploy.sh --dry-run
+bash deploy.sh
 ```
+
+En VS Code está como tarea: `Cmd+Shift+B`. Y `bash deploy.sh --dry-run` muestra
+qué subiría sin tocar el servidor.
 
 `deploy.sh` sincroniza por `rsync` sobre SSH y **no sube** `tools/`, `.vscode/`,
 `.github/`, `README.md` ni `deploy.sh`: en el servidor solo queda lo que el
@@ -48,10 +54,19 @@ SSH Keys Manager → IMPORT:
 cat ~/.ssh/commandigital_siteground.pub
 ```
 
-### Si más adelante se usa GitHub
+### Configuración de GitHub Actions
 
-`.github/workflows/deploy.yml` ya está listo: al hacer push a `main` publica
-solo. Solo hay que cargar los secrets que el propio archivo documenta.
+Ya está activa. El workflow vive en `.github/workflows/deploy.yml` y necesita
+**un solo secret**:
+
+| Secret | Qué es |
+|---|---|
+| `SSH_PRIVATE_KEY` | contenido de `~/.ssh/commandigital_siteground` |
+
+El host, el usuario, el puerto y la ruta van como `env` en el propio workflow,
+en texto plano a propósito: el servidor solo acepta autenticación por llave, así
+que esos datos no abren nada por sí solos. Si el repo llegara a hacerse público,
+conviene moverlos de vuelta a secrets.
 
 ---
 
