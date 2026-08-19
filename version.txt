@@ -1,0 +1,2 @@
+Versión publicada: deploy-20260819-123711
+Commit: se actualiza en cada push a main
