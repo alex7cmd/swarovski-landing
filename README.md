@@ -87,6 +87,8 @@ cae al respaldo `mailto:`; en el servidor sí envía el correo.
 swarovski-landing/
 ├── index.html               Marcado + sprite SVG de iconos
 ├── enviar.php               Endpoint del formulario (PHP mail → hola@commandigital.biz)
+├── .htaccess                Política de caché
+├── tools/versionar.sh       Sella los assets con ?v=<hash>
 ├── deploy.sh                Publicación por SSH/rsync
 ├── assets/
 │   ├── css/styles.css       Tokens en :root, Grid, Flexbox, animaciones, responsive
@@ -136,3 +138,37 @@ Cópialos en `tools/kit-src/artes/` y ejecuta `bash tools/generar-recursos.sh`.
 | jQuery | 3.7.1 por CDN con `integrity` + respaldo local |
 | Responsive | `clamp()` y breakpoints en 1100 / 860 / 560 px; en móvil la tabla se vuelve tarjetas |
 | Formulario | `enviar.php` con honeypot y anti-flood; si no hay PHP, respaldo `mailto:` |
+
+---
+
+## Caché: por qué un cambio se ve al instante
+
+El hosting sirve los archivos estáticos directamente desde NGINX, saltándose el
+`.htaccess`, y les pone 180 días de caché. Eso significaba que una publicación
+tardaba meses en verse. Se resolvió con dos piezas que trabajan juntas:
+
+**1. La portada es `index.php`, no `index.html`.** Los archivos dinámicos sí
+pasan por Apache, así que sí respetan el `.htaccess` y la página se revalida en
+cada visita. Un `RewriteRule` mantiene viva la liga con `/index.html`.
+
+**2. Los assets llevan su huella en la URL.** `tools/versionar.sh` reescribe
+cada referencia como `assets/css/styles.css?v=056de980`, donde el hash sale del
+contenido del archivo. Al cambiar el archivo cambia la URL, y el navegador la
+pide de nuevo aunque tenga la vieja guardada un año.
+
+El sellado corre solo dentro del deploy, en los dos caminos. No hay que
+acordarse de nada ni bumpear versiones a mano.
+
+**Un detalle a tener presente:** quien haya abierto la página antes del
+19/08/2026 tiene una copia guardada con la política vieja y necesita un
+recargado forzado (`Cmd+Shift+R`) una sola vez. De ahí en adelante, automático.
+
+### Peso de la página
+
+| | Transferido |
+|---|---|
+| Primera visita | ~66 KB (gzip) |
+| Visitas siguientes | ~7 KB — solo el HTML |
+
+jQuery es la mitad del peso inicial (33 KB). Si algún día se quiere bajar, ahí
+está el margen.
