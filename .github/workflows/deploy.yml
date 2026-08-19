@@ -52,6 +52,7 @@ jobs:
       - name: Sellar assets con su versión
         run: |
           bash tools/versionar.sh .
+          bash tools/generar-index-php.sh .
           echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > version.txt
           echo "Commit: $GITHUB_SHA" >> version.txt
 
@@ -80,6 +81,7 @@ jobs:
             --exclude '.DS_Store' --exclude 'node_modules/' \
             --exclude 'tools/' --exclude 'deploy.sh' \
             --exclude '.gitignore' --exclude 'README.md' \
+            --exclude 'index.html' \
             ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/"
 
       - name: Resumen

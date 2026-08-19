@@ -19,9 +19,12 @@ SWAROVSKI · ESPECIFICACIONES TÉCNICAS PARA ENTREGA DE ARTES DE IMPRESIÓN
    · Sin relleno, línea de 0.1 pt, color plano de referencia.
    · Sin trazos duplicados encimados ni nodos sueltos.
 
-4. RECORTE DE VINIL
+4. VINIL ADHESIVO IMPRESO + CORTE A CONTORNO
    · Entregar en vectores, con los trazos ya creados.
-   · El color se especifica por color de material, no por tinta.
+   · El trazo de corte a contorno va en una capa aparte llamada "CORTE",
+     sin relleno y con línea de 0.1 pt.
+   · Dejar 2 mm de sangrado de tinta por fuera del trazo de corte, para que
+     un desfase mínimo de la máquina no deje filo blanco.
    · Indicar en el archivo cuál es la cara de aplicación.
 
 5. IMPRESO

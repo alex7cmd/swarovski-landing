@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ------------------------------------------------------------------------------
-# Sella index.php y data.js con la huella de cada archivo, para romper la caché
+# Sella index.html y data.js con la huella de cada archivo, para romper la caché
 # solo cuando el contenido cambia de verdad.
 #
 #   assets/css/styles.css  →  assets/css/styles.css?v=a1b2c3d4
@@ -64,10 +64,7 @@ if os.path.isfile(data_js):
         cambios.append(("assets/img/artes/ (sin cambios)", v_img))
 
 # --- 2. Referencias a assets dentro de index.html -----------------------------
-# La página de entrada es .php (ver el comentario dentro del archivo)
-html = os.path.join(raiz, "index.php")
-if not os.path.isfile(html):
-    html = os.path.join(raiz, "index.html")
+html = os.path.join(raiz, "index.html")
 s = io.open(html, encoding="utf-8").read()
 
 patron = re.compile(r'(?P<attr>href|src)="(?P<ruta>assets/[^"?#]+)(?:\?v=[0-9a-f]+)?"')

@@ -10,14 +10,14 @@
   /** Columnas de la hoja (el orden define las letras A, B, C…). */
   var COLUMNAS = [
     { key: "no",        label: "No.",                titulo: "No.",                tipo: "num",  ancho: "48px"  },
-    { key: "archivo",   label: "Nombre del archivo", titulo: "Nombre del archivo", tipo: "text", ancho: "240px" },
+    { key: "archivo",   label: "Nombre del archivo", titulo: "Nombre del archivo", tipo: "text", ancho: "236px" },
     { key: "posicion",  label: "Posición",           titulo: "Posición",           tipo: "text", ancho: "150px" },
     { key: "ancho",     label: "Ancho",              titulo: "Medidas",            tipo: "num",  ancho: "78px", grupo: 2 },
     { key: "alto",      label: "Alto",               titulo: "",                   tipo: "num",  ancho: "78px"  },
-    { key: "rebase",    label: "Rebase",             titulo: "Rebase",             tipo: "text", ancho: "72px"  },
-    { key: "material",  label: "Material",           titulo: "Material",           tipo: "text", ancho: "150px" },
-    { key: "cantidad",  label: "Cantidad",           titulo: "Cantidad",           tipo: "num",  ancho: "76px"  },
-    { key: "notas",     label: "Notas",              titulo: "Notas",              tipo: "text", ancho: "90px" },
+    { key: "rebase",    label: "Rebase",             titulo: "Rebase",             tipo: "text", ancho: "64px"  },
+    { key: "material",  label: "Material",           titulo: "Material",           tipo: "text", ancho: "190px" },
+    { key: "cantidad",  label: "Cantidad",           titulo: "Cantidad",           tipo: "num",  ancho: "70px"  },
+    { key: "notas",     label: "Notas",              titulo: "Notas",              tipo: "text", ancho: "70px" },
     { key: "img",       label: "Imagen",             titulo: "Imagen",             tipo: "img",  ancho: "96px" },
     { key: "ubicacion", label: "Ubicación",          titulo: "Ubicación",          tipo: "text", ancho: "120px" }
   ];
@@ -38,14 +38,14 @@
     { hoja: "artes",
       archivo: "swarovski-impreso-maquina-cisne.ai", posicion: "PARTE TRASERA",
       ancho: "45 CM", alto: "57 CM", rebase: "—",
-      material: "RECORTE DE VINIL", tipo: "vinil", cantidad: 1, notas: "—",
+      material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "01-maquina-garra-trasera.jpg", alt: "Parte trasera de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
       archivo: "swarovski-impreso-maquina-cisne.ai", posicion: "LATERALES",
       ancho: "32 CM", alto: "40 CM", rebase: "—",
-      material: "RECORTE DE VINIL", tipo: "vinil", cantidad: 2, notas: "—",
+      material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "02-maquina-garra-laterales.jpg", alt: "Laterales de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
@@ -73,7 +73,7 @@
     { hoja: "artes",
       archivo: "swarovski-espejo-impreso", posicion: "PARTE TRASERA DEL ESPEJO",
       ancho: "24 CM", alto: "36 CM", rebase: "—",
-      material: "IMPRESO", tipo: "impreso", cantidad: 1, notas: "—",
+      material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "06-espejo-trasera.jpg", alt: "Parte trasera del espejo",
       ubicacion: "ESPEJO" }
   ];

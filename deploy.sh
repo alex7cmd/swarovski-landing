@@ -48,6 +48,7 @@ fi
 
 echo "→ Sellando assets con su versión"
 bash "$LOCAL/tools/versionar.sh" "$LOCAL"
+bash "$LOCAL/tools/generar-index-php.sh" "$LOCAL"
 
 {
   echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
@@ -67,6 +68,7 @@ rsync -rlptzv --checksum $DRY \
   --exclude 'deploy.sh' \
   --exclude '.gitignore' \
   --exclude 'README.md' \
+  --exclude 'index.html' \
   "$LOCAL/" "$HOST:$REMOTE/"
 
 echo

@@ -1,16 +1,3 @@
-<?php
-/**
- * Punto de entrada de la guía de artes.
- *
- * Es .php y no .html a propósito: el hosting sirve los archivos estáticos
- * directamente desde NGINX, saltándose el .htaccess y cacheándolos 180 días.
- * Al pasar por PHP, la página se revalida en cada visita y una publicación
- * se ve al instante. Los assets sí se sirven estáticos (rápido) porque
- * llevan ?v=<hash> en la URL y no necesitan revalidarse.
- */
-header('Cache-Control: no-cache, must-revalidate, max-age=0');
-header('X-Content-Type-Options: nosniff');
-?>
 <!DOCTYPE html>
 <html lang="es" data-theme="dark" data-theme-pref="auto">
 <head>
@@ -152,7 +139,7 @@ header('X-Content-Type-Options: nosniff');
           <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
         </button>
 
-        <a class="btn btn--primary" href="assets/downloads/Artes_Swarovski.zip?v=b6ccee02"
+        <a class="btn btn--primary" href="assets/downloads/Artes_Swarovski.zip?v=dfe0ac3d"
            data-download data-filename="Artes_Swarovski.zip" data-label="Paquete de artes">
           <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
           <span class="btn__label">Descargar recursos</span>
@@ -172,7 +159,7 @@ header('X-Content-Type-Options: nosniff');
             <p class="eyebrow">Guía de producción gráfica</p>
 
             <div class="hero__actions">
-              <a class="btn btn--primary" href="assets/downloads/Artes_Swarovski.zip?v=b6ccee02"
+              <a class="btn btn--primary" href="assets/downloads/Artes_Swarovski.zip?v=dfe0ac3d"
                  data-download data-filename="Artes_Swarovski.zip" data-label="Paquete de artes">
                 <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
                 <span class="btn__label">Descargar recursos</span>
@@ -232,17 +219,17 @@ header('X-Content-Type-Options: nosniff');
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span class="marquee__item">Recorte de vinil</span>
+        <span class="marquee__item">Vinil adhesivo impreso + corte a contorno</span>
         <span class="marquee__item">Corte láser</span>
-        <span class="marquee__item">Impreso</span>
+        <span class="marquee__item">Corte a contorno</span>
         <span class="marquee__item">Archivos .ai en vectores</span>
         <span class="marquee__item">Textos en trazos</span>
         <span class="marquee__item">Medidas finales</span>
       </div>
       <div class="marquee__track">
-        <span class="marquee__item">Recorte de vinil</span>
+        <span class="marquee__item">Vinil adhesivo impreso + corte a contorno</span>
         <span class="marquee__item">Corte láser</span>
-        <span class="marquee__item">Impreso</span>
+        <span class="marquee__item">Corte a contorno</span>
         <span class="marquee__item">Archivos .ai en vectores</span>
         <span class="marquee__item">Textos en trazos</span>
         <span class="marquee__item">Medidas finales</span>
@@ -404,7 +391,7 @@ header('X-Content-Type-Options: nosniff');
         <noscript>
           <p class="sheet-note">
             Esta guía se construye con JavaScript. Actívalo o descarga el
-            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=d590f90d">CSV de la guía</a>.
+            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=690f7a9d">CSV de la guía</a>.
           </p>
         </noscript>
       </div>
@@ -503,7 +490,7 @@ header('X-Content-Type-Options: nosniff');
       '<script src="assets/vendor/jquery-3.7.1.min.js?v=2c872dbe"><\/script>'
     );
   </script>
-  <script src="assets/js/data.js?v=23f4faed"></script>
+  <script src="assets/js/data.js?v=af80c987"></script>
   <script src="assets/js/main.js?v=28a7c5c4"></script>
 </body>
 </html>
