@@ -49,6 +49,12 @@ jobs:
           fi
           echo "Destino validado: \$HOME/$REMOTE_PATH"
 
+      - name: Sellar assets con su versión
+        run: |
+          bash tools/versionar.sh .
+          echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > version.txt
+          echo "Commit: $GITHUB_SHA" >> version.txt
+
       - name: Preparar clave SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

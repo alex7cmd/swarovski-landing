@@ -46,6 +46,15 @@ if ! ssh "$HOST" "[ -d \"\$HOME/$REMOTE\" ]"; then
   ssh "$HOST" "mkdir -p \"\$HOME/$REMOTE\""
 fi
 
+echo "→ Sellando assets con su versión"
+bash "$LOCAL/tools/versionar.sh" "$LOCAL"
+
+{
+  echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+  echo "Commit: $(git -C "$LOCAL" rev-parse --short HEAD 2>/dev/null || echo 'sin git')"
+  echo "Origen: deploy.sh (manual)"
+} > "$LOCAL/version.txt"
+
 echo "→ Sincronizando${DRY:+ (simulación)}"
 rsync -rlptzv --checksum $DRY \
   --delete \

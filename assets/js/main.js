@@ -415,7 +415,9 @@
 
     /** HTML de una fila de arte. */
     rowHtml: function (a) {
-      var src = (this.data.rutaImagenes || "") + a.img,
+      // La versión rompe la caché del navegador cuando se reemplaza una imagen
+      var v = this.data.versionAssets ? "?v=" + this.data.versionAssets : "",
+          src = (this.data.rutaImagenes || "") + a.img + v,
           meta = a.posicion + " · " + a.ancho + " × " + a.alto + " · " + a.material;
 
       return '<tr class="sheet-row" data-hoja="' + a.hoja + '" data-material="' + Util.esc(a.material) + '"' +

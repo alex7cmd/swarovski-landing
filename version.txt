@@ -1,2 +1,0 @@
-Versión publicada: deploy-20260819-130010
-Se actualiza en cada push a main.

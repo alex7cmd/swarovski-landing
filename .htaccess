@@ -1,0 +1,63 @@
+# ==============================================================================
+# Caché de la guía de artes
+#
+# Regla de oro: el HTML nunca se guarda, los assets se guardan un año.
+# Funciona porque cada css/js/imagen lleva ?v=<hash> en la URL: cuando el
+# archivo cambia, cambia el hash, cambia la URL y el navegador la pide de nuevo.
+# Así una publicación se ve al instante sin sacrificar velocidad.
+# ==============================================================================
+
+# --- 1. Assets con huella en la URL: se pueden guardar un año -----------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|jpe?g|png|gif|webp|svg|ico|woff2?|zip|csv|txt)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # --- 2. HTML: siempre se revalida (esto va después, para que gane) ----------
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+    Header unset Expires
+    Header unset Pragma
+  </FilesMatch>
+
+  # --- 3. El marcador de versión tampoco se guarda ----------------------------
+  <FilesMatch "^version\.txt$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+    Header unset Expires
+  </FilesMatch>
+
+  # --- 4. El endpoint del formulario nunca se cachea ---------------------------
+  <FilesMatch "\.php$">
+    Header set Cache-Control "no-store, no-cache, must-revalidate"
+    Header unset Expires
+  </FilesMatch>
+</IfModule>
+
+# --- 5. Expiración explícita (por si el servidor usa mod_expires) -------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html                 "access plus 0 seconds"
+  ExpiresByType text/css                  "access plus 1 year"
+  ExpiresByType application/javascript    "access plus 1 year"
+  ExpiresByType text/javascript           "access plus 1 year"
+  ExpiresByType image/svg+xml             "access plus 1 year"
+  ExpiresByType image/jpeg                "access plus 1 year"
+  ExpiresByType image/png                 "access plus 1 year"
+  ExpiresByType image/webp                "access plus 1 year"
+  ExpiresByType font/woff2                "access plus 1 year"
+</IfModule>
+
+# --- 6. Compresión (el servidor ya la aplica; esto la asegura) -----------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
+    application/javascript text/javascript application/json image/svg+xml
+</IfModule>
+
+# --- 7. Detalles de servidor ---------------------------------------------------
+<IfModule mod_headers.c>
+  # Evita que el navegador adivine tipos de archivo
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# No listar el contenido de las carpetas
+Options -Indexes
