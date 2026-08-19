@@ -17,6 +17,14 @@ HOST="${SW_HOST:-commandigital}"                     # alias de ~/.ssh/config
 REMOTE="${SW_REMOTE:-www/commandigital.biz/public_html/share/swarovski}"
 LOCAL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# rsync corre con --delete: si la ruta remota fuera la equivocada borraría
+# lo que no es. Se valida antes de tocar nada.
+case "$REMOTE" in
+  /*)               echo "✗ SW_REMOTE debe ser relativo al home, sin / inicial." >&2; exit 1 ;;
+  */share/swarovski) : ;;
+  *)                echo "✗ SW_REMOTE debe terminar en share/swarovski." >&2; exit 1 ;;
+esac
+
 DRY=""
 [ "${1:-}" = "--dry-run" ] && DRY="--dry-run"
 

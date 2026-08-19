@@ -1,10 +1,10 @@
 # ------------------------------------------------------------------------------
-# Publica en producción cada vez que se hace push a main.
+# Publica en producción cada push a main.
+#   https://www.commandigital.biz/share/swarovski/index.html
 #
-# Solo se activa si el proyecto vive en GitHub. Requiere estos secrets en
-# Settings → Secrets and variables → Actions:
+# Secrets necesarios (Settings → Secrets and variables → Actions):
 #
-#   SSH_PRIVATE_KEY   contenido de ~/.ssh/commandigital_siteground
+#   SSH_PRIVATE_KEY   contenido de ~/.ssh/commandigital_siteground  (pbcopy < ...)
 #   SSH_HOST          ssh.commandigital.biz
 #   SSH_USER          u2645-1val7vrtblk8
 #   SSH_PORT          18765
@@ -19,7 +19,7 @@ on:
 
 concurrency:
   group: deploy-produccion
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -27,19 +27,57 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Red de seguridad: rsync corre con --delete, así que si REMOTE_PATH
+      # llegara vacío o mal escrito borraría la carpeta equivocada.
+      - name: Validar destino
+        env:
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+        run: |
+          if [ -z "$REMOTE_PATH" ]; then
+            echo "::error::El secret REMOTE_PATH está vacío."; exit 1
+          fi
+          case "$REMOTE_PATH" in
+            /*) echo "::error::REMOTE_PATH debe ser relativo al home, sin / inicial."; exit 1 ;;
+            */share/swarovski) : ;;
+            *) echo "::error::REMOTE_PATH debe terminar en share/swarovski."; exit 1 ;;
+          esac
+          echo "Destino validado."
+
       - name: Preparar clave SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Crear la carpeta remota si no existe
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "mkdir -p \"\$HOME/$REMOTE_PATH\""
 
       - name: Sincronizar por rsync
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           rsync -rlptzv --checksum --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
+            -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT" \
             --exclude '.git/' --exclude '.github/' --exclude '.vscode/' \
             --exclude '.DS_Store' --exclude 'node_modules/' \
             --exclude 'tools/' --exclude 'deploy.sh' \
             --exclude '.gitignore' --exclude 'README.md' \
-            ./ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_PATH }}/"
+            ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/"
+
+      - name: Resumen
+        run: echo "### ✅ Publicado en https://www.commandigital.biz/share/swarovski/index.html" >> $GITHUB_STEP_SUMMARY
