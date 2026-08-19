@@ -2,13 +2,12 @@
 # Publica en producción cada push a main.
 #   https://www.commandigital.biz/share/swarovski/index.html
 #
-# Secrets necesarios (Settings → Secrets and variables → Actions):
+# Único secret necesario (Settings → Secrets and variables → Actions):
 #
-#   SSH_PRIVATE_KEY   contenido de ~/.ssh/commandigital_siteground  (pbcopy < ...)
-#   SSH_HOST          ssh.commandigital.biz
-#   SSH_USER          u2645-1val7vrtblk8
-#   SSH_PORT          18765
-#   REMOTE_PATH       www/commandigital.biz/public_html/share/swarovski
+#   SSH_PRIVATE_KEY   contenido de ~/.ssh/commandigital_siteground
+#
+# Los demás datos de conexión van abajo en texto plano a propósito: no abren
+# nada por sí solos, porque el servidor solo acepta autenticación por llave.
 # ------------------------------------------------------------------------------
 name: Deploy a producción
 
@@ -21,55 +20,53 @@ concurrency:
   group: deploy-produccion
   cancel-in-progress: false
 
+env:
+  SSH_HOST: ssh.commandigital.biz
+  SSH_USER: u2645-1val7vrtblk8
+  SSH_PORT: "18765"
+  REMOTE_PATH: www/commandigital.biz/public_html/share/swarovski
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      # Red de seguridad: rsync corre con --delete, así que si REMOTE_PATH
-      # llegara vacío o mal escrito borraría la carpeta equivocada.
+      # Red de seguridad: rsync corre con --delete, así que una ruta mal
+      # escrita borraría la carpeta equivocada.
       - name: Validar destino
-        env:
-          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           if [ -z "$REMOTE_PATH" ]; then
-            echo "::error::El secret REMOTE_PATH está vacío."; exit 1
+            echo "::error::REMOTE_PATH está vacío."; exit 1
           fi
           case "$REMOTE_PATH" in
             /*) echo "::error::REMOTE_PATH debe ser relativo al home, sin / inicial."; exit 1 ;;
             */share/swarovski) : ;;
             *) echo "::error::REMOTE_PATH debe terminar en share/swarovski."; exit 1 ;;
           esac
-          echo "Destino validado."
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "::error::Falta el secret SSH_PRIVATE_KEY."; exit 1
+          fi
+          echo "Destino validado: \$HOME/$REMOTE_PATH"
 
       - name: Preparar clave SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          echo "Probando la conexión…"
+          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o BatchMode=yes -o ConnectTimeout=20 \
+            "$SSH_USER@$SSH_HOST" 'echo "Conectado como $(whoami)"'
 
       - name: Crear la carpeta remota si no existe
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
             "mkdir -p \"\$HOME/$REMOTE_PATH\""
 
       - name: Sincronizar por rsync
-        env:
-          SSH_HOST: ${{ secrets.SSH_HOST }}
-          SSH_USER: ${{ secrets.SSH_USER }}
-          SSH_PORT: ${{ secrets.SSH_PORT }}
-          REMOTE_PATH: ${{ secrets.REMOTE_PATH }}
         run: |
           rsync -rlptzv --checksum --delete \
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT" \
@@ -80,4 +77,6 @@ jobs:
             ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/"
 
       - name: Resumen
-        run: echo "### ✅ Publicado en https://www.commandigital.biz/share/swarovski/index.html" >> $GITHUB_STEP_SUMMARY
+        run: |
+          echo "### ✅ Publicado" >> $GITHUB_STEP_SUMMARY
+          echo "https://www.commandigital.biz/share/swarovski/index.html" >> $GITHUB_STEP_SUMMARY
