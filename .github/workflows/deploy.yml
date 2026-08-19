@@ -1,0 +1,45 @@
+# ------------------------------------------------------------------------------
+# Publica en producción cada vez que se hace push a main.
+#
+# Solo se activa si el proyecto vive en GitHub. Requiere estos secrets en
+# Settings → Secrets and variables → Actions:
+#
+#   SSH_PRIVATE_KEY   contenido de ~/.ssh/commandigital_siteground
+#   SSH_HOST          ssh.commandigital.biz
+#   SSH_USER          u2645-1val7vrtblk8
+#   SSH_PORT          18765
+#   REMOTE_PATH       www/commandigital.biz/public_html/share/swarovski
+# ------------------------------------------------------------------------------
+name: Deploy a producción
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-produccion
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preparar clave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Sincronizar por rsync
+        run: |
+          rsync -rlptzv --checksum --delete \
+            -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.SSH_PORT }}" \
+            --exclude '.git/' --exclude '.github/' --exclude '.vscode/' \
+            --exclude '.DS_Store' --exclude 'node_modules/' \
+            --exclude 'tools/' --exclude 'deploy.sh' \
+            --exclude '.gitignore' --exclude 'README.md' \
+            ./ "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.REMOTE_PATH }}/"

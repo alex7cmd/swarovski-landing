@@ -1,0 +1,14 @@
+PAQUETE DE ARTES · SWAROVSKI
+===========================
+
+Contenido:
+
+  /artes                         Archivos originales de cada pieza (.ai / .pdf).
+  Guia_Artes_Swarovski.csv       La guía completa en CSV (Excel, Numbers o Sheets).
+  Especificaciones_Tecnicas.txt  Formato de entrega, medidas, corte láser y color.
+
+Antes de enviar tus artes revisa el punto 2 de las especificaciones:
+las medidas de la guía YA INCLUYEN rebase, son medidas finales.
+
+Guía en línea: https://www.commandigital.biz/share/swarovski/index.html
+Dudas y cambios: hola@commandigital.biz

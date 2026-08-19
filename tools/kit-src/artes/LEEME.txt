@@ -1,0 +1,13 @@
+Coloca aquí los archivos originales de los 6 artes:
+
+  swarovski-impreso-maquina-cisne.ai
+  swarovski-corte-laser.ai
+  Swarovski-corte-laser-logo.ai
+  swarovski-corte-laser-mesa-cisne.ai
+  swarovski-espejo-impreso.ai
+
+Después ejecuta, desde la raíz del proyecto:
+
+  bash tools/generar-recursos.sh
+
+y el ZIP de la landing quedará actualizado con los archivos reales.

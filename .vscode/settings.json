@@ -1,0 +1,8 @@
+{
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.tabSize": 2,
+  "liveServer.settings.port": 4321,
+  "search.exclude": { "assets/vendor": true }
+}

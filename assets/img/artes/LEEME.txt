@@ -1,0 +1,17 @@
+IMÁGENES DE LOS ARTES
+=====================
+
+Coloca aquí la foto o el render de cada arte con EXACTAMENTE estos nombres.
+En cuanto el archivo existe, la miniatura y el pop-up lo muestran solos —
+no hay que tocar código.
+
+  01-maquina-garra-trasera.jpg     → swarovski-impreso-maquina-cisne.ai · PARTE TRASERA
+  02-maquina-garra-laterales.jpg   → swarovski-impreso-maquina-cisne.ai · LATERALES
+  03-maquina-garra-frontal.jpg     → swarovski-corte-laser.ai · FRONTAL / CABECERA
+  04-mesa-escritorio-frontal.jpg   → Swarovski-corte-laser-logo.ai · FRONTAL
+  05-mesa-escritorio-laterales.jpg → swarovski-corte-laser-mesa-cisne · LATERALES
+  06-espejo-trasera.jpg            → swarovski-espejo-impreso · PARTE TRASERA DEL ESPEJO
+
+Formato sugerido: JPG, lado largo de 1600 px, menos de 400 KB.
+¿Prefieres PNG o WebP? Cambia la extensión en el campo `img` de
+assets/js/data.js y listo.

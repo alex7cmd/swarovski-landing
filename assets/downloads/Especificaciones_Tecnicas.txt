@@ -1,0 +1,38 @@
+================================================================================
+SWAROVSKI · ESPECIFICACIONES TÉCNICAS PARA ENTREGA DE ARTES DE IMPRESIÓN
+================================================================================
+
+1. FORMATO DE ENTREGA
+   · Archivo abierto .AI (CC 2024 o inferior) + un PDF de referencia.
+   · Textos convertidos a trazos/curvas antes de enviar.
+   · Imágenes enlazadas empaquetadas o incrustadas (nunca a baja resolución).
+   · Nomenclatura: la misma del campo "Nombre del archivo" de la guía.
+
+2. MEDIDAS
+   · Las medidas de la guía son FINALES e incluyen rebase.
+   · Considera siempre una zona de protección: nada de texto o logotipo
+     al filo del corte.
+   · Trabaja a escala 1:1 siempre que el tamaño lo permita.
+
+3. CORTE LÁSER
+   · Trazos cerrados, en una capa aparte llamada "CORTE".
+   · Sin relleno, línea de 0.1 pt, color plano de referencia.
+   · Sin trazos duplicados encimados ni nodos sueltos.
+
+4. RECORTE DE VINIL
+   · Entregar en vectores, con los trazos ya creados.
+   · El color se especifica por color de material, no por tinta.
+   · Indicar en el archivo cuál es la cara de aplicación.
+
+5. IMPRESO
+   · CMYK con perfil ISO Coated v2 (ECI) / FOGRA39.
+   · Resolución mínima 150 DPI al 100 % del tamaño final.
+   · Negro de textos: 100 K puro en tipografía menor a 24 pt.
+
+6. CONTACTO
+   · Dudas, cambios y nuevas versiones: hola@commandigital.biz
+   · Guía en línea: https://www.commandigital.biz/share/swarovski/index.html
+
+--------------------------------------------------------------------------------
+NOTA: documento de trabajo interno para el equipo de producción gráfica.
+--------------------------------------------------------------------------------

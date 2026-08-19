@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Publicar a producción",
+      "type": "shell",
+      "command": "bash deploy.sh",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Simular publicación (dry-run)",
+      "type": "shell",
+      "command": "bash deploy.sh --dry-run",
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Regenerar paquete de artes (ZIP + CSV)",
+      "type": "shell",
+      "command": "bash tools/generar-recursos.sh",
+      "presentation": { "reveal": "always", "panel": "dedicated", "clear": true },
+      "problemMatcher": []
+    },
+    {
+      "label": "Servidor local (puerto 4321)",
+      "type": "shell",
+      "command": "python3 -m http.server 4321",
+      "isBackground": true,
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    }
+  ]
+}
