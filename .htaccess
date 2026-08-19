@@ -31,9 +31,24 @@
     Header set Cache-Control "no-store, no-cache, must-revalidate"
     Header unset Expires
   </FilesMatch>
+
+  # --- 5. La portada se revalida siempre, pero sí se puede guardar -------------
+  #     (no-store rompería el botón "atrás" del navegador)
+  <FilesMatch "^index\.php$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+    Header unset Expires
+  </FilesMatch>
 </IfModule>
 
-# --- 5. Expiración explícita (por si el servidor usa mod_expires) -------------
+# --- Compatibilidad: la liga con /index.html sigue funcionando ----------------
+# El archivo ya no existe en disco, así que NGINX no puede servirlo directo y
+# la petición llega a Apache, que la manda a index.php con las cabeceras buenas.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^index\.html$ index.php [L]
+</IfModule>
+
+# --- 6. Expiración explícita (por si el servidor usa mod_expires) -------------
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/html                 "access plus 0 seconds"
@@ -47,13 +62,13 @@
   ExpiresByType font/woff2                "access plus 1 year"
 </IfModule>
 
-# --- 6. Compresión (el servidor ya la aplica; esto la asegura) -----------------
+# --- 7. Compresión (el servidor ya la aplica; esto la asegura) -----------------
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml \
     application/javascript text/javascript application/json image/svg+xml
 </IfModule>
 
-# --- 7. Detalles de servidor ---------------------------------------------------
+# --- 8. Detalles de servidor ---------------------------------------------------
 <IfModule mod_headers.c>
   # Evita que el navegador adivine tipos de archivo
   Header set X-Content-Type-Options "nosniff"

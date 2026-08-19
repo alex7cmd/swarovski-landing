@@ -1,3 +1,16 @@
+<?php
+/**
+ * Punto de entrada de la guía de artes.
+ *
+ * Es .php y no .html a propósito: el hosting sirve los archivos estáticos
+ * directamente desde NGINX, saltándose el .htaccess y cacheándolos 180 días.
+ * Al pasar por PHP, la página se revalida en cada visita y una publicación
+ * se ve al instante. Los assets sí se sirven estáticos (rápido) porque
+ * llevan ?v=<hash> en la URL y no necesitan revalidarse.
+ */
+header('Cache-Control: no-cache, must-revalidate, max-age=0');
+header('X-Content-Type-Options: nosniff');
+?>
 <!DOCTYPE html>
 <html lang="es" data-theme="dark" data-theme-pref="auto">
 <head>
@@ -15,9 +28,9 @@
   <meta property="og:locale" content="es_MX">
   <meta property="og:title" content="Swarovski · Guía de artes de impresión">
   <meta property="og:description" content="Medidas, materiales y ubicación de cada pieza gráfica.">
-  <meta property="og:url" content="https://www.commandigital.biz/share/swarovski/index.html">
+  <meta property="og:url" content="https://www.commandigital.biz/share/swarovski/">
 
-  <link rel="canonical" href="https://www.commandigital.biz/share/swarovski/index.html">
+  <link rel="canonical" href="https://www.commandigital.biz/share/swarovski/">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,2 27,12 16,30 5,12' fill='%237EE0FF'/%3E%3C/svg%3E">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
