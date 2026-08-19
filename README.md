@@ -1,72 +1,123 @@
-# Swarovski · Crystal Night 2026 — Landing de guía de artes
+# Swarovski · Guía de artes de impresión
 
-Landing page estática que reproduce una **guía de artes de impresión** (como la que
-se comparte en Excel o Google Sheets) con una tabla interactiva, mockups de cada
-pieza y descarga del kit de recursos.
+Landing estática que publica la guía de artes de producción gráfica: tabla
+interactiva tipo hoja de cálculo, pop-up con la imagen de cada arte, formulario
+de comentarios y descarga del paquete de archivos.
 
-> Maqueta de demostración con textos y mockups genéricos: no incluye material
-> gráfico oficial de ninguna marca.
+**Producción:** https://www.commandigital.biz/share/swarovski/index.html
 
-## Cómo verlo
+---
 
-Basta con abrir `index.html` en el navegador. Para que las descargas y el CSV se
-comporten igual que en producción, conviene servirlo por HTTP:
+## Publicar cambios (flujo actual)
+
+Todo va directo a producción, sin ramas ni staging.
 
 ```bash
-python3 -m http.server 4321 --directory swarovski-landing
+git add -A && git commit -m "lo que cambiaste" && bash deploy.sh
 ```
 
-Después entra a `http://localhost:4321`.
+En VS Code también está como tarea: `Cmd+Shift+P` → **Tasks: Run Task** →
+*Publicar a producción* (o `Cmd+Shift+B`, que la ejecuta directo).
+
+Para ver qué subiría sin tocar el servidor:
+
+```bash
+bash deploy.sh --dry-run
+```
+
+`deploy.sh` sincroniza por `rsync` sobre SSH y **no sube** `tools/`, `.vscode/`,
+`.github/`, `README.md` ni `deploy.sh`: en el servidor solo queda lo que el
+navegador necesita.
+
+### Conexión SSH
+
+El alias `commandigital` ya está en `~/.ssh/config`:
+
+```
+Host commandigital
+  HostName ssh.commandigital.biz
+  User u2645-1val7vrtblk8
+  Port 18765
+  IdentityFile ~/.ssh/commandigital_siteground
+```
+
+La llave pública debe estar importada en SiteGround → Site Tools → Devs →
+SSH Keys Manager → IMPORT:
+
+```bash
+cat ~/.ssh/commandigital_siteground.pub
+```
+
+### Si más adelante se usa GitHub
+
+`.github/workflows/deploy.yml` ya está listo: al hacer push a `main` publica
+solo. Solo hay que cargar los secrets que el propio archivo documenta.
+
+---
+
+## Ver en local
+
+```bash
+python3 -m http.server 4321
+```
+
+`http://localhost:4321`. Nota: el formulario necesita PHP, así que en local
+cae al respaldo `mailto:`; en el servidor sí envía el correo.
+
+---
 
 ## Estructura
 
 ```
 swarovski-landing/
-├── index.html                  Marcado semántico + sprite SVG de iconos
+├── index.html               Marcado + sprite SVG de iconos
+├── enviar.php               Endpoint del formulario (PHP mail → hola@commandigital.biz)
+├── deploy.sh                Publicación por SSH/rsync
 ├── assets/
-│   ├── css/styles.css          Tokens en :root, Grid, Flexbox, animaciones, responsive
+│   ├── css/styles.css       Tokens en :root, Grid, Flexbox, animaciones, responsive
 │   ├── js/
-│   │   ├── data.js             Fuente de verdad: columnas, hojas y artes
-│   │   └── main.js             Módulos jQuery: tema, nav, reveal, hoja, descargas
-│   ├── img/                    12 mockups en SVG (generados, sin dependencias)
-│   ├── vendor/jquery-3.7.1.min.js   Respaldo local del CDN
-│   └── downloads/              Archivos que descarga el usuario (ZIP, CSV, TXT)
+│   │   ├── data.js          ← FUENTE DE VERDAD: las artes y las columnas
+│   │   └── main.js          Tema, hoja de cálculo, pop-up, formulario, descargas
+│   ├── img/artes/           Imágenes de cada arte (ver su LEEME.txt)
+│   ├── vendor/              Respaldo local de jQuery
+│   └── downloads/           ZIP y CSV que descarga el usuario
 └── tools/
-    ├── generar-mockups.py      Regenera los SVG de assets/img
-    ├── generar-recursos.sh     Regenera CSV y ZIP de assets/downloads
-    └── kit-src/                Textos que van dentro del ZIP
+    ├── generar-recursos.sh  Regenera ZIP y CSV
+    └── kit-src/             Contenido del ZIP (textos + carpeta artes/)
 ```
 
-## Qué se contempló
+---
 
-| Requisito | Dónde |
-|---|---|
-| Buenas prácticas | HTML semántico, ARIA, `alt`, `skip link`, foco visible, SRI en el CDN, JS en módulos con `"use strict"`, sin variables globales sueltas |
-| `:root` | Bloque 01 de `styles.css`: color, tipografía fluida, espaciado, sombras, transiciones y capas como custom properties; tema claro por sobreescritura de tokens |
-| jQuery | `assets/js/main.js` (3.7.1 vía CDN con `integrity` + respaldo local): filtros, orden, selección de celda, contadores, menú, tema y descargas |
-| Responsive | Escala fluida con `clamp()`, breakpoints en 1100 / 860 / 560 px; la tabla se convierte en tarjetas apiladas en móvil |
-| Flexbox | Header, barras de la hoja, listas de archivos, footer, botones |
-| CSS Grid | Hero, tarjetas de especificaciones, estadísticas, descargas, footer y las celdas del modo tarjeta |
-| Animaciones CSS | `@keyframes` de entrada, flotación del cristal, brillo del botón, marquesina, destellos, anillos y barra de progreso; todo anulado con `prefers-reduced-motion` |
+## Tareas frecuentes
 
-## La hoja de cálculo
+### Cambiar una medida, material o cantidad
 
-`assets/js/data.js` es el único lugar donde se editan las artes. Al cambiarlo se
-actualizan solos la tabla, los totales, el filtro de materiales, las pestañas y el CSV.
-
-Incluye letras de columna, numeración de filas, barra de fórmulas, encabezados
-fijos, banda de sección, totales fijos al pie, pestañas de hoja y barra de estado.
-Se puede buscar, filtrar por material, ordenar por cualquier columna, seleccionar
-celdas (con navegación por flechas), exportar a CSV e imprimir.
-
-Para regenerar los archivos descargables después de editar los datos:
+Se edita **solo** `assets/js/data.js`. La tabla, el filtro de materiales, los
+totales, la barra de estado y el CSV se recalculan solos.
 
 ```bash
-bash tools/generar-recursos.sh
+bash tools/generar-recursos.sh   # actualiza el ZIP y el CSV descargables
+bash deploy.sh
 ```
 
-## Compatibilidad
+### Subir la imagen de un arte
 
-Navegadores actuales (Chrome, Edge, Safari, Firefox). Sin proceso de build ni
-dependencias de Node en tiempo de ejecución: es HTML, CSS y JavaScript servidos
-tal cual. Los scripts de `tools/` solo se usan para regenerar assets.
+Deja el archivo en `assets/img/artes/` con el nombre exacto que indica
+`assets/img/artes/LEEME.txt` (p. ej. `01-maquina-garra-trasera.jpg`).
+La miniatura y el pop-up lo toman solos, sin tocar código.
+
+### Agregar los archivos .ai al paquete descargable
+
+Cópialos en `tools/kit-src/artes/` y ejecuta `bash tools/generar-recursos.sh`.
+
+---
+
+## Detalles de implementación
+
+| Tema | Dónde |
+|---|---|
+| Tokens de diseño | `:root` en `styles.css`; el tema claro se hace sobreescribiendo tokens |
+| Tema automático | `Theme` en `main.js`: sigue la hora local (claro 7:00–19:00) y se revisa cada minuto. El botón cicla auto → claro → oscuro |
+| jQuery | 3.7.1 por CDN con `integrity` + respaldo local |
+| Responsive | `clamp()` y breakpoints en 1100 / 860 / 560 px; en móvil la tabla se vuelve tarjetas |
+| Formulario | `enviar.php` con honeypot y anti-flood; si no hay PHP, respaldo `mailto:` |

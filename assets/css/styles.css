@@ -1133,8 +1133,7 @@ button { cursor: pointer; background: none; border: 0; }
 @media (max-width: 560px) {
   :root { --section-y: clamp(2.75rem, 1.5rem + 6vw, 4rem); }
   .hero__actions .btn { inline-size: 100%; }
-  .hero__visual { max-inline-size: 280px; min-block-size: 220px; }
-  .stats { grid-template-columns: repeat(2, 1fr); }
+  .hero__visual { max-inline-size: 220px; min-block-size: 180px; }
   .footer__grid { grid-template-columns: 1fr; }
   .toast-stack { inset-inline: var(--space-4); inset-block-end: var(--space-4); }
   .to-top { inline-size: 40px; block-size: 40px; }
@@ -1340,7 +1339,7 @@ button { cursor: pointer; background: none; border: 0; }
 }
 
 @media (max-width: 560px) {
-  .stats { grid-auto-flow: row; grid-auto-columns: auto; }
+  .stats { grid-template-columns: none; grid-auto-flow: row; grid-auto-columns: auto; }
   .contact-form__foot .btn { inline-size: 100%; }
 }
 
