@@ -295,8 +295,10 @@ button { cursor: pointer; background: none; border: 0; }
 @keyframes toast-in  { from { opacity: 0; transform: translateY(24px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes bar-grow  { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-/* Reveal on scroll (la clase .is-visible la añade jQuery) */
-.reveal {
+/* Reveal on scroll (la clase .is-visible la añade jQuery).
+   Se oculta únicamente cuando hay JavaScript —lo marca .con-js— para que un
+   fallo del script no deje la página en blanco. */
+.con-js .reveal {
   opacity: 0;
   transform: translate3d(0, 28px, 0);
   transition:
@@ -305,10 +307,10 @@ button { cursor: pointer; background: none; border: 0; }
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
-.reveal.is-visible { opacity: 1; transform: none; }
-.reveal--left  { transform: translate3d(-32px, 0, 0); }
-.reveal--right { transform: translate3d(32px, 0, 0); }
-.reveal--zoom  { transform: scale(.94); }
+.con-js .reveal.is-visible { opacity: 1; transform: none; }
+.con-js .reveal--left  { transform: translate3d(-32px, 0, 0); }
+.con-js .reveal--right { transform: translate3d(32px, 0, 0); }
+.con-js .reveal--zoom  { transform: scale(.94); }
 
 /* ============================================================================
    05. COMPONENTES BASE

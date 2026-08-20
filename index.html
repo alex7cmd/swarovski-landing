@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@200;300;400;500;600;700;800&display=swap">
 
-  <link rel="preload" href="assets/css/styles.css?v=821d37dd" as="style">
-  <link rel="stylesheet" href="assets/css/styles.css?v=821d37dd">
+  <link rel="preload" href="assets/css/styles.css?v=975c7b66" as="style">
+  <link rel="stylesheet" href="assets/css/styles.css?v=975c7b66">
 
   <!-- Tema antes del primer pintado: automático según la hora, como iOS/macOS -->
   <script>
@@ -37,6 +37,10 @@
       var efectivo = (pref === "light" || pref === "dark") ? pref : porHora;
       document.documentElement.setAttribute("data-theme", efectivo);
       document.documentElement.setAttribute("data-theme-pref", pref);
+      // Marca que hay JavaScript: solo entonces el CSS oculta los bloques que
+      // aparecen al hacer scroll. Sin esta marca todo se ve, de modo que un
+      // fallo del script nunca deja la página en blanco.
+      document.documentElement.classList.add("con-js");
     })();
   </script>
 </head>
@@ -543,7 +547,7 @@
       '<script src="assets/vendor/jquery-3.7.1.min.js?v=2c872dbe"><\/script>'
     );
   </script>
-  <script src="assets/js/data.js?v=59a28afe"></script>
-  <script src="assets/js/main.js?v=7c2f64d2"></script>
+  <script src="assets/js/data.js?v=17af685b"></script>
+  <script src="assets/js/main.js?v=245c4c7a"></script>
 </body>
 </html>

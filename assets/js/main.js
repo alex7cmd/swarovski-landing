@@ -204,6 +204,10 @@
         }
       });
 
+      // El umbral va en 0: basta con que asome un pixel. Con un porcentaje,
+      // un bloque más alto que la pantalla nunca llega a cumplirlo y se queda
+      // invisible para siempre — que es justo lo que pasó cuando la tabla
+      // creció a 16 artes y midió más de 10 000 px en móvil.
       if ("IntersectionObserver" in window) {
         var io = new window.IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
@@ -212,18 +216,42 @@
               io.unobserve(entry.target);
             }
           });
-        }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
         $items.each(function () { io.observe(this); });
-      } else {
-        var check = Util.throttle(function () {
-          var limit = $(window).scrollTop() + $(window).height() * 0.9;
-          $items.not(".is-visible").each(function () {
-            if ($(this).offset().top < limit) { $(this).addClass("is-visible"); }
-          });
-        }, 120);
-        $(window).on("scroll resize", check);
-        check();
       }
+
+      // Red de seguridad: se ejecuta siempre, no solo si falta el observador.
+      // Nada en esta página puede quedarse invisible por un fallo de animación.
+      var revisar = Util.throttle(function () {
+        var limite = $(window).scrollTop() + $(window).height();
+        $items.not(".is-visible").each(function () {
+          if ($(this).offset().top < limite) { $(this).addClass("is-visible"); }
+        });
+      }, 150);
+      $(window).on("scroll resize", revisar);
+      revisar();
+
+      // Último seguro, y el que de verdad garantiza que nada quede invisible:
+      // en vez de esperar un evento, se revisan las posiciones cada tanto.
+      // Si el observador o el scroll fallan —cosa que ya pasó—, esto lo cubre.
+      // Se apaga solo en cuanto todo está visible, así que no cuesta nada.
+      var vigilante = window.setInterval(function () {
+        revisar();
+        if (!$items.not(".is-visible").length) { window.clearInterval(vigilante); }
+      }, 700);
+
+      // Y si tras un minuto siguiera habiendo algo oculto dentro de la pantalla,
+      // se apaga el efecto entero: perder la animación es un detalle, dejar la
+      // página en blanco no lo es.
+      window.setTimeout(function () {
+        window.clearInterval(vigilante);
+        var falla = false;
+        $items.not(".is-visible").each(function () {
+          var r = this.getBoundingClientRect();
+          if (r.bottom > 0 && r.top < window.innerHeight && r.height > 0) { falla = true; return false; }
+        });
+        if (falla) { $("html").removeClass("con-js"); }
+      }, 60000);
     }
   };
 
