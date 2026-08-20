@@ -1,0 +1,24 @@
+IMÁGENES DE LOS ARTES
+=====================
+
+Deja aquí la foto de cada arte con el mismo nombre que aparece en el campo
+`img` de assets/js/data.js. Hoy son estas seis:
+
+  swarovski-vinil-maquina-cisne-atras.webp       → fila 1 · máquina garra, parte trasera
+  swarovski-vinil-maquina-cisne-laterales.webp   → fila 2 · máquina garra, laterales
+  swarovski-corte-laser-maquina-frontal.webp     → fila 3 · máquina garra, frontal/cabecera
+  swarovski-corte-laser-mesa-frontal.webp        → fila 4 · mesa de escritorio, frontal
+  swarovski-corte-laser-mesa-cisne-laterales.webp → fila 5 · mesa de escritorio, laterales
+  swarovski-espejo-impreso-atras.webp            → fila 6 · espejo, parte trasera
+
+Formatos: webp, jpg o png. No hay límite de tamaño: las fotos grandes se usan
+en el pop-up.
+
+/thumbs
+-------
+Las miniaturas de la tabla se generan solas, no se editan a mano:
+
+  bash tools/generar-miniaturas.sh
+
+Convierte cada imagen a JPEG de 400 px (~15 KB) para que la tabla cargue
+ligera. Si agregas o reemplazas una foto, corre ese comando antes de publicar.

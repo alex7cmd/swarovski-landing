@@ -417,6 +417,9 @@
     rowHtml: function (a) {
       // La versión rompe la caché del navegador cuando se reemplaza una imagen
       var v = this.data.versionAssets ? "?v=" + this.data.versionAssets : "",
+          // La tabla carga la miniatura (~15 KB); la foto completa solo se
+          // descarga si alguien abre el pop-up.
+          mini = (this.data.rutaMiniaturas || "") + a.img.replace(/\.[^.]+$/, ".jpg") + v,
           src = (this.data.rutaImagenes || "") + a.img + v,
           meta = a.posicion + " · " + a.ancho + " × " + a.alto + " · " + a.material;
 
@@ -438,7 +441,7 @@
             ' data-img="' + Util.esc(src) + '"' +
             ' data-titulo="' + Util.esc(a.archivo) + '"' +
             ' data-meta="' + Util.esc(meta) + '">' +
-            '<img class="thumb__img" src="' + Util.esc(src) + '" alt="' + Util.esc(a.alt) + '" loading="lazy" decoding="async">' +
+            '<img class="thumb__img" src="' + Util.esc(mini) + '" alt="' + Util.esc(a.alt) + '" loading="lazy" decoding="async">' +
             '<span class="thumb__ph"><svg aria-hidden="true"><use href="#i-image"></use></svg>Ver imagen</span>' +
           "</button>" +
         "</td>" +

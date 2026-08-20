@@ -36,45 +36,45 @@
    */
   var ARTES = [
     { hoja: "artes",
-      archivo: "swarovski-impreso-maquina-cisne.ai", posicion: "PARTE TRASERA",
+      archivo: "swarovski-vinil-maquina-cisne-atras.ai", posicion: "PARTE TRASERA",
       ancho: "45 CM", alto: "57 CM", rebase: "—",
       material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
-      img: "01-maquina-garra-trasera.jpg", alt: "Parte trasera de la máquina garra",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
-      archivo: "swarovski-impreso-maquina-cisne.ai", posicion: "LATERALES",
+      archivo: "swarovski-vinil-maquina-cisne-laterales.ai", posicion: "LATERALES",
       ancho: "32 CM", alto: "40 CM", rebase: "—",
       material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 2, notas: "—",
-      img: "02-maquina-garra-laterales.jpg", alt: "Laterales de la máquina garra",
+      img: "swarovski-vinil-maquina-cisne-laterales.webp", alt: "Laterales de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
       archivo: "swarovski-corte-laser.ai", posicion: "FRONTAL / CABECERA",
       ancho: "37 CM", alto: "5 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 1, notas: "—",
-      img: "03-maquina-garra-frontal.jpg", alt: "Frontal y cabecera de la máquina garra",
+      img: "swarovski-corte-laser-maquina-frontal.webp", alt: "Frontal y cabecera de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
-      archivo: "Swarovski-corte-laser-logo.ai", posicion: "FRONTAL",
+      archivo: "swarovski-corte-laser-mesa-frontal.ai", posicion: "FRONTAL",
       ancho: "45 CM", alto: "6 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 1, notas: "—",
-      img: "04-mesa-escritorio-frontal.jpg", alt: "Frontal de la mesa de escritorio",
+      img: "swarovski-corte-laser-mesa-frontal.webp", alt: "Frontal de la mesa de escritorio",
       ubicacion: "MESA DE ESCRITORIO" },
 
     { hoja: "artes",
-      archivo: "swarovski-corte-laser-mesa-cisne", posicion: "LATERALES",
+      archivo: "swarovski-corte-laser-mesa-cisne-laterales.ai", posicion: "LATERALES",
       ancho: "24 CM", alto: "30 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 2, notas: "—",
-      img: "05-mesa-escritorio-laterales.jpg", alt: "Laterales de la mesa de escritorio",
+      img: "swarovski-corte-laser-mesa-cisne-laterales.webp", alt: "Laterales de la mesa de escritorio",
       ubicacion: "MESA DE ESCRITORIO" },
 
     { hoja: "artes",
-      archivo: "swarovski-espejo-impreso", posicion: "PARTE TRASERA DEL ESPEJO",
+      archivo: "swarovski-espejo-impreso-atras.ai", posicion: "PARTE TRASERA DEL ESPEJO",
       ancho: "24 CM", alto: "36 CM", rebase: "—",
       material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
-      img: "06-espejo-trasera.jpg", alt: "Parte trasera del espejo",
+      img: "swarovski-espejo-impreso-atras.webp", alt: "Parte trasera del espejo",
       ubicacion: "ESPEJO" }
   ];
 
@@ -82,10 +82,11 @@
     columnas: COLUMNAS,
     hojas: HOJAS,
     artes: ARTES,
-    rutaImagenes: "assets/img/artes/",
+    rutaImagenes: "assets/img/",
+    rutaMiniaturas: "assets/img/thumbs/",
     // La sella tools/versionar.sh en cada publicación: al cambiar una
     // imagen cambia este valor y el navegador la vuelve a pedir.
-    versionAssets: "e3853b43",
+    versionAssets: "7ee8bdb5",
     documento: {
       titulo: "Guía de artes · Swarovski",
       archivo: "Guia_Artes_Impresion_Swarovski_V1.xlsx",

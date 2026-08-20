@@ -1,10 +1,11 @@
 Coloca aquí los archivos originales de los 6 artes:
 
-  swarovski-impreso-maquina-cisne.ai
+  swarovski-vinil-maquina-cisne-atras.ai
+  swarovski-vinil-maquina-cisne-laterales.ai
   swarovski-corte-laser.ai
-  Swarovski-corte-laser-logo.ai
-  swarovski-corte-laser-mesa-cisne.ai
-  swarovski-espejo-impreso.ai
+  swarovski-corte-laser-mesa-frontal.ai
+  swarovski-corte-laser-mesa-cisne-laterales.ai
+  swarovski-espejo-impreso-atras.ai
 
 Después ejecuta, desde la raíz del proyecto:
 

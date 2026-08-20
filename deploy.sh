@@ -46,6 +46,9 @@ if ! ssh "$HOST" "[ -d \"\$HOME/$REMOTE\" ]"; then
   ssh "$HOST" "mkdir -p \"\$HOME/$REMOTE\""
 fi
 
+echo "→ Generando miniaturas"
+bash "$LOCAL/tools/generar-miniaturas.sh"
+
 echo "→ Sellando assets con su versión"
 bash "$LOCAL/tools/versionar.sh" "$LOCAL"
 bash "$LOCAL/tools/generar-index-php.sh" "$LOCAL"

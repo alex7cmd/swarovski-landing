@@ -54,14 +54,14 @@ cambios = []
 #        en data.js. Se sella primero para que el hash de data.js ya la incluya.
 data_js = os.path.join(raiz, "assets/js/data.js")
 if os.path.isfile(data_js):
-    v_img = huella_carpeta("assets/img/artes")
+    v_img = huella_carpeta("assets/img")
     s = io.open(data_js, encoding="utf-8").read()
     nuevo, n = re.subn(r'(versionAssets:\s*")[^"]*(")', r'\g<1>%s\g<2>' % v_img, s)
     if n and nuevo != s:
         io.open(data_js, "w", encoding="utf-8").write(nuevo)
-        cambios.append(("assets/img/artes/ (vía data.js)", v_img))
+        cambios.append(("assets/img/ (vía data.js)", v_img))
     elif n:
-        cambios.append(("assets/img/artes/ (sin cambios)", v_img))
+        cambios.append(("assets/img/ (sin cambios)", v_img))
 
 # --- 2. Referencias a assets dentro de index.html -----------------------------
 html = os.path.join(raiz, "index.html")
