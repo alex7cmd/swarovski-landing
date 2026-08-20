@@ -64,17 +64,28 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-          echo "Probando la conexión…"
-          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o BatchMode=yes -o ConnectTimeout=20 \
-            "$SSH_USER@$SSH_HOST" 'echo "Conectado como $(whoami)"'
+          echo "IP de este runner: $(curl -s --max-time 10 https://api.ipify.org || echo 'no disponible')"
 
-      - name: Crear la carpeta remota si no existe
+      # El hosting rechaza la conexión de vez en cuando (parece filtrado por IP).
+      # Se reintenta, y si aun así falla se publica el motivo real en la pestaña
+      # Actions en vez del genérico "exit code 1".
+      - name: Conectar al servidor
         run: |
-          ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "mkdir -p \"\$HOME/$REMOTE_PATH\""
+          for intento in 1 2 3; do
+            echo "Intento $intento de 3…"
+            if ssh -i ~/.ssh/deploy_key -p "$SSH_PORT" -o BatchMode=yes -o ConnectTimeout=25 \
+                 "$SSH_USER@$SSH_HOST" "mkdir -p \"\$HOME/$REMOTE_PATH\" && echo Conectado como \$(whoami)" 2> /tmp/ssh.err; then
+              exit 0
+            fi
+            echo "Falló: $(tr '\n' ' ' < /tmp/ssh.err)"
+            [ "$intento" -lt 3 ] && sleep 15
+          done
+          echo "::error::SSH falló tras 3 intentos → $(tr '\n' ' ' < /tmp/ssh.err)"
+          exit 1
 
       - name: Sincronizar por rsync
         run: |
+          set -o pipefail
           rsync -rlptzv --checksum --delete \
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT" \
             --exclude '.git/' --exclude '.github/' --exclude '.vscode/' \
@@ -82,7 +93,10 @@ jobs:
             --exclude 'tools/' --exclude 'deploy.sh' \
             --exclude '.gitignore' --exclude 'README.md' \
             --exclude 'index.html' \
-            ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/"
+            ./ "$SSH_USER@$SSH_HOST:$REMOTE_PATH/" 2> /tmp/rsync.err || {
+              echo "::error::rsync falló → $(tr '\n' ' ' < /tmp/rsync.err)"
+              exit 1
+            }
 
       - name: Resumen
         run: |
