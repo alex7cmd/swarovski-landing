@@ -75,7 +75,77 @@
       ancho: "24 CM", alto: "36 CM", rebase: "—",
       material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-espejo-impreso-atras.webp", alt: "Parte trasera del espejo",
-      ubicacion: "ESPEJO" }
+      ubicacion: "ESPEJO" },
+
+    { hoja: "artes",
+      archivo: "mesa_SpotColorPANTONE1767U.ai", posicion: "PARTE FRONTAL Y TRASERA",
+      ancho: "107 CM", alto: "71.1 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
+      img: "swarovski-corte-laser-mesa-cisne-laterales.webp", alt: "Mesa de escritorio, frente y trasera",
+      ubicacion: "MESA DE ESCRITORIO" },
+
+    { hoja: "artes",
+      archivo: "mesa_lateralSpotColorPANTONE1767U.ai", posicion: "LATERALES",
+      ancho: "40 CM", alto: "60 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
+      img: "swarovski-corte-laser-mesa-cisne-laterales.webp", alt: "Laterales de la mesa de escritorio",
+      ubicacion: "MESA DE ESCRITORIO" },
+
+    { hoja: "artes",
+      archivo: "maquina-lateral-plasta.ai", posicion: "LATERALES",
+      ancho: "75 CM", alto: "193 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 2, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Laterales de la máquina garra",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-lateral-plasta-opacidad.ai", posicion: "LATERALES",
+      ancho: "59 CM", alto: "152 CM", rebase: "—",
+      material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 2, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Laterales de la máquina garra en vinil transparente",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-trasera-opacidad.ai", posicion: "PARTE TRASERA",
+      ancho: "64 CM", alto: "152 CM", rebase: "—",
+      material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra en vinil transparente",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-trasera-plasta.ai", posicion: "PARTE TRASERA",
+      ancho: "80 CM", alto: "193 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 1, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-frontal-cabecera-plasta.ai", posicion: "PARTE FRONTAL",
+      ancho: "80 CM", alto: "28 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 1, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Cabecera frontal de la máquina garra",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-frontal-cristalSuperior-opacidad.ai", posicion: "PARTE FRONTAL",
+      ancho: "80 CM", alto: "78 CM", rebase: "—",
+      material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Cristal superior de la máquina garra",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-frontal-tableroFranja.ai", posicion: "PARTE FRONTAL",
+      ancho: "80 CM", alto: "10 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 1, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Franja del tablero de la máquina garra",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "maquina-frontal-inferior-opacidad.ai", posicion: "PARTE FRONTAL",
+      ancho: "80 CM", alto: "58 CM", rebase: "—",
+      material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
+      img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte inferior frontal de la máquina garra",
+      ubicacion: "MAQUINA GARRA" }
   ];
 
   window.SW_DATA = {

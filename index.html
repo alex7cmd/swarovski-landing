@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@200;300;400;500;600;700;800&display=swap">
 
-  <link rel="preload" href="assets/css/styles.css?v=7bdad97c" as="style">
-  <link rel="stylesheet" href="assets/css/styles.css?v=7bdad97c">
+  <link rel="preload" href="assets/css/styles.css?v=7af1cac7" as="style">
+  <link rel="stylesheet" href="assets/css/styles.css?v=7af1cac7">
 
   <!-- Tema antes del primer pintado: automático según la hora, como iOS/macOS -->
   <script>
@@ -107,6 +107,9 @@
     <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/>
     </symbol>
+    <symbol id="i-alerta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/>
+    </symbol>
     <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <path d="m21 8-9-5-9 5v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v9"/>
     </symbol>
@@ -129,7 +132,7 @@
           <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
         </button>
 
-        <a class="btn btn--primary" href="assets/downloads/swarovski-impresos.7z?v=98fda077"
+        <a class="btn btn--primary" href="assets/downloads/swarovski-impresos.7z?v=c6ebf73c"
            data-download data-filename="swarovski-impresos.7z" data-label="Paquete de impresos"
              aria-label="Descargar recursos">
           <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
@@ -150,7 +153,7 @@
             <p class="eyebrow">Guía de producción gráfica</p>
 
             <div class="hero__actions">
-              <a class="btn btn--primary" href="assets/downloads/swarovski-impresos.7z?v=98fda077"
+              <a class="btn btn--primary" href="assets/downloads/swarovski-impresos.7z?v=c6ebf73c"
                  data-download data-filename="swarovski-impresos.7z" data-label="Paquete de impresos">
                 <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
                 <span class="btn__label">Descargar recursos</span>
@@ -364,10 +367,19 @@
             No hay artes que coincidan con la búsqueda. Prueba con otro término o limpia los filtros.
           </p>
 
-          <p class="sheet-note">
-            Nota importante: todas las medidas de este documento contienen rebase, es decir,
-            son medidas finales de artes. Además debe considerarse una zona de protección en cada arte.
-          </p>
+          <div class="sheet-note">
+            <p>
+              <span class="sheet-note__dot" aria-hidden="true"></span>
+              Nota importante: todas las medidas de este documento contienen rebase, es decir,
+              son medidas finales de artes. Además debe considerarse una zona de protección en cada arte.
+            </p>
+            <p>
+              <span class="sheet-note__dot" aria-hidden="true"></span>
+              Color: Pantone 1767 U — referencia de color objetivo. La visualización digital es
+              únicamente referencial. Igualar en producción contra referencia Pantone y realizar
+              prueba física de color previa a producción final.
+            </p>
+          </div>
 
           <div class="sheet-tabs" id="sheetTabs" role="tablist" aria-label="Hojas del documento"></div>
 
@@ -378,6 +390,40 @@
             <span class="sheet-status__item">Clic en una celda · flechas para navegar</span>
           </div>
         </div>
+
+        <aside class="aviso reveal" role="note">
+          <h3 class="aviso__titulo">
+            <svg aria-hidden="true"><use href="#i-alerta"></use></svg>
+            Nota importante de medidas
+          </h3>
+
+          <p>
+            Las medidas generales de la máquina de garra se tomaron como referencia a partir de la
+            información disponible del equipo: <b>193 cm de alto × 80 cm de ancho × 75 cm de fondo</b>.
+          </p>
+          <p>
+            Las dimensiones correspondientes a ventanas, cristales, cabecera, paneles, marcos y demás
+            áreas de aplicación gráfica no fueron proporcionadas en planos técnicos del fabricante,
+            por lo que fueron estimadas proporcionalmente a partir de fotografías y material de referencia.
+          </p>
+          <p>
+            Estas medidas deberán considerarse <b>referenciales y no definitivas para producción</b>.
+          </p>
+          <p>
+            Antes de realizar la impresión, corte o instalación de cualquier vinil, gráfico o elemento
+            producido a medida, el proveedor deberá verificar y validar físicamente todas las dimensiones
+            directamente sobre la máquina real.
+          </p>
+          <p>
+            Cualquier ajuste necesario deberá realizarse con base en las medidas finales tomadas en sitio
+            o sobre el equipo físico.
+          </p>
+
+          <p class="aviso__remate">
+            No producir artes finales únicamente con base en las medidas referenciales
+            sin previa validación del equipo real.
+          </p>
+        </aside>
 
         <figure class="render reveal">
           <button type="button" class="render__frame" data-lightbox
@@ -395,7 +441,7 @@
         <noscript>
           <p class="sheet-note">
             Esta guía se construye con JavaScript. Actívalo o descarga el
-            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=66a71b84">CSV de la guía</a>.
+            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=6b01d961">CSV de la guía</a>.
           </p>
         </noscript>
       </div>
@@ -494,7 +540,7 @@
       '<script src="assets/vendor/jquery-3.7.1.min.js?v=2c872dbe"><\/script>'
     );
   </script>
-  <script src="assets/js/data.js?v=5f7a3378"></script>
-  <script src="assets/js/main.js?v=0233fb92"></script>
+  <script src="assets/js/data.js?v=6d4f31c3"></script>
+  <script src="assets/js/main.js?v=7fb03262"></script>
 </body>
 </html>

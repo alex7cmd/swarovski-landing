@@ -331,15 +331,7 @@ button { cursor: pointer; background: none; border: 0; }
   --btn-fg: var(--color-accent-ink);
   --btn-bd: transparent;
 }
-.btn--primary:hover { box-shadow: var(--shadow-glow); background: var(--color-accent); }
-
-/* Brillo que recorre el botón (animación CSS pura) */
-.btn--primary::after {
-  content: ""; position: absolute; inset-block: 0; inline-size: 40%;
-  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 55%), transparent);
-  animation: shimmer 3.6s var(--ease-soft) infinite;
-  z-index: -1;
-}
+.btn--primary:hover { box-shadow: var(--shadow-md); background: var(--color-accent); }
 
 .btn--ghost   { --btn-bg: transparent; }
 .btn--sm      { padding: 0.6em 1.1em; font-size: var(--fs-xs); }
@@ -574,18 +566,42 @@ button { cursor: pointer; background: none; border: 0; }
    08. MARQUEE (animación CSS infinita)
    ========================================================================== */
 .marquee {
+  position: relative;
   display: flex; overflow: hidden; user-select: none;
   padding-block: var(--space-4);
   border-block: 1px solid var(--color-border);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  /* `contain` evita que el navegador recalcule el resto de la página
+     en cada cuadro de la animación */
+  contain: content;
 }
+
+/* Los degradados de los extremos se hacen con pseudo-elementos en vez de
+   mask-image: la máscara obliga al navegador a componer la franja completa
+   en cada cuadro, y en móvil eso se siente pesado. */
+.marquee::before, .marquee::after {
+  content: ""; position: absolute; inset-block: 0; z-index: 1;
+  inline-size: clamp(28px, 7%, 90px); pointer-events: none;
+}
+.marquee::before {
+  inset-inline-start: 0;
+  background: linear-gradient(90deg, var(--color-bg), transparent);
+}
+.marquee::after {
+  inset-inline-end: 0;
+  background: linear-gradient(270deg, var(--color-bg), transparent);
+}
+
 .marquee__track {
   display: flex; flex: none; gap: var(--space-6);
   padding-inline-end: var(--space-6);
-  animation: marquee 34s linear infinite;
+  animation: marquee 22s linear infinite;
+  will-change: transform;
 }
 .marquee:hover .marquee__track { animation-play-state: paused; }
+
+/* jQuery la detiene cuando la franja sale de pantalla: no tiene sentido
+   gastar batería animando algo que nadie está viendo */
+.marquee.is-paused .marquee__track { animation-play-state: paused; }
 .marquee__item {
   display: inline-flex; align-items: center; gap: var(--space-3);
   font-size: var(--fs-sm); letter-spacing: .2em; text-transform: uppercase;
@@ -885,10 +901,25 @@ button { cursor: pointer; background: none; border: 0; }
 
 /* Nota inferior en rojo (como en la guía original) */
 .sheet-note {
+  display: grid; gap: var(--space-2);
   padding: var(--space-3) var(--space-4);
   font-size: 0.68rem; font-weight: 700; letter-spacing: .04em; text-align: center;
   color: var(--sheet-note); background: var(--sheet-bg);
   border-block-start: 1px solid var(--sheet-grid);
+  text-wrap: pretty;
+}
+.sheet-note p { display: block; }
+
+/* Punto que llama la atención sobre cada advertencia */
+.sheet-note__dot {
+  display: inline-block; vertical-align: baseline;
+  inline-size: 7px; block-size: 7px; margin-inline-end: 0.5em;
+  background: currentColor; border-radius: 50%;
+  animation: nota-latido 2.4s var(--ease-soft) infinite;
+}
+@keyframes nota-latido {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .35; transform: scale(.8); }
 }
 
 /* Pestañas de hoja */
@@ -1348,6 +1379,12 @@ button { cursor: pointer; background: none; border: 0; }
 .chip--impreso {
   background: rgb(232 200 126 / 14%); color: var(--brand-gold); border-color: rgb(232 200 126 / 32%);
 }
+/* El vinil transparente se distingue del blanco: son procesos distintos */
+.chip--transparente {
+  background: rgb(185 196 210 / 14%); color: var(--brand-silver);
+  border-color: rgb(185 196 210 / 32%);
+}
+[data-theme="light"] .chip--transparente { color: #566072; }
 [data-theme="light"] .chip--laser   { color: #6D45D9; }
 [data-theme="light"] .chip--impreso { color: #9A6B12; }
 
@@ -1416,4 +1453,49 @@ button { cursor: pointer; background: none; border: 0; }
 @media print {
   .render__frame { break-inside: avoid; border: 1px solid #999; }
   .render__frame:hover { transform: none; }
+}
+
+/* ============================================================================
+   22. AVISO DE MEDIDAS REFERENCIALES
+   --------------------------------------------------------------------------
+   Va aparte de la nota roja de la hoja: es texto largo y necesita leerse,
+   no solo llamar la atención.
+   ========================================================================== */
+.aviso {
+  margin: var(--space-6) auto 0;
+  max-inline-size: 920px;
+  display: grid; gap: var(--space-3);
+  padding: clamp(1.25rem, 1rem + 1.5vw, 2rem);
+  background: color-mix(in srgb, var(--brand-gold) 7%, var(--color-surface));
+  border: 1px solid color-mix(in srgb, var(--brand-gold) 30%, transparent);
+  border-inline-start: 3px solid var(--brand-gold);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.aviso__titulo {
+  display: flex; align-items: center; gap: var(--space-2);
+  font-size: var(--fs-md); font-weight: 600;
+  color: var(--color-text);
+}
+.aviso__titulo svg {
+  inline-size: 1.15em; block-size: 1.15em; flex: none;
+  color: var(--brand-gold);
+}
+
+.aviso b { color: var(--color-text); font-weight: 600; }
+
+.aviso__remate {
+  margin-block-start: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-weight: 700; color: var(--color-text);
+  background: color-mix(in srgb, var(--brand-gold) 14%, transparent);
+  border-radius: var(--radius-md);
+  text-wrap: pretty;
+}
+
+@media print {
+  .aviso { break-inside: avoid; border: 1px solid #999; background: none; }
 }

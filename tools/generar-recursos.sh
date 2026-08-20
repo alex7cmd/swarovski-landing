@@ -4,7 +4,7 @@
 #
 #   assets/js/data.js       → fuente de verdad de la guía (genera el CSV)
 #   tools/kit-src/*.txt     → textos del paquete (editables a mano)
-#   tools/kit-src/artes/    → archivos originales .ai de cada pieza
+#   tools/kit-src/*.txt     → especificaciones que acompañan al CSV
 #
 # Uso:  bash tools/generar-recursos.sh      (desde la raíz del proyecto)
 # ------------------------------------------------------------------------------
@@ -41,12 +41,9 @@ cp tools/kit-src/*.txt "$BUILD/"
 mkdir -p "$BUILD/artes"
 cp -R tools/kit-src/artes/. "$BUILD/artes/"
 
-echo "→ Empaquetando ZIP"
+# El paquete que descarga el usuario es swarovski-impresos.7z, que se
+# mantiene a mano. Aquí solo se refrescan el CSV y las especificaciones.
 mkdir -p "$OUT"
-rm -f "$OUT"/*.zip
-( cd "$BUILD" && zip -qr Artes_Swarovski.zip . -x ".*" "*/.*" )
-
-cp "$BUILD/Artes_Swarovski.zip" "$OUT/"
 cp "$BUILD/Guia_Artes_Swarovski.csv" "$OUT/"
 cp tools/kit-src/Especificaciones_Tecnicas.txt "$OUT/"
 

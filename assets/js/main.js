@@ -228,6 +228,32 @@
   };
 
   /* ==========================================================================
+     4b. Marquesina — se detiene cuando sale de pantalla
+     --------------------------------------------------------------------------
+     Una animación infinita consume batería aunque nadie la vea. Se pausa
+     cuando la franja no está visible y se reanuda al volver.
+     ========================================================================== */
+  var Marquee = {
+    init: function () {
+      var $m = $(".marquee");
+      if (!$m.length || !("IntersectionObserver" in window)) { return; }
+
+      var io = new window.IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.classList.toggle("is-paused", !entry.isIntersecting);
+        });
+      }, { threshold: 0 });
+
+      $m.each(function () { io.observe(this); });
+
+      // También al cambiar de pestaña
+      $(document).on("visibilitychange", function () {
+        $m.toggleClass("is-paused", document.hidden);
+      });
+    }
+  };
+
+  /* ==========================================================================
      5. Contadores animados
      ========================================================================== */
   var Counters = {
@@ -788,6 +814,7 @@
     Theme.init();
     Nav.init();
     Reveal.init();
+    Marquee.init();
     Counters.init();
     Lightbox.init();
     Sheet.init();
