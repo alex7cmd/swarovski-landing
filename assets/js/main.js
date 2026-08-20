@@ -140,8 +140,8 @@
             siguiente = self.ORDEN[($.inArray(actual, self.ORDEN) + 1) % self.ORDEN.length];
         self.guardar(siguiente);
         self.aplicar(siguiente);
-        Toast.show(self.ETIQUETAS[siguiente],
-          siguiente === "auto" ? "Cambia solo al amanecer y al anochecer." : "Se mantendrá así en este navegador.");
+        // Sin aviso: el cambio de tema ya se ve solo, y al ciclar entre los
+        // tres estados los avisos se apilaban en pantalla.
       });
 
       // Revisión periódica: solo actúa si la preferencia sigue en "auto"
