@@ -9,7 +9,7 @@
 
 # --- 1. Assets con huella en la URL: se pueden guardar un año -----------------
 <IfModule mod_headers.c>
-  <FilesMatch "\.(css|js|jpe?g|png|gif|webp|svg|ico|woff2?|zip|csv|txt)$">
+  <FilesMatch "\.(css|js|jpe?g|png|gif|webp|svg|ico|woff2?|zip|7z|rar|csv|txt)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 

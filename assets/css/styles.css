@@ -686,7 +686,13 @@ button { cursor: pointer; background: none; border: 0; }
   outline: none; border-color: var(--color-accent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 22%, transparent);
 }
-.field--select { padding-inline-start: 0.9em; inline-size: auto; cursor: pointer; }
+.field--select {
+  padding-inline-start: 0.9em;
+  inline-size: auto; max-inline-size: 100%;
+  cursor: pointer;
+  /* El nombre del material es largo: se recorta en vez de empujar el layout */
+  text-overflow: ellipsis;
+}
 .sheet-toolbar__spacer { flex: 1 1 auto; }
 
 .tool-btn {
@@ -1067,8 +1073,6 @@ button { cursor: pointer; background: none; border: 0; }
   }
   .nav__link::after { display: none; }
 
-  .header__actions .btn { display: none; }
-
   /* ---- La hoja se convierte en tarjetas apiladas ---- */
   .sheet-app { --card-gap: var(--space-3); }
   .sheet-scroll { max-block-size: none; overflow: visible; }
@@ -1127,6 +1131,7 @@ button { cursor: pointer; background: none; border: 0; }
   .sheet-formula { display: none; }
   .sheet-toolbar { gap: var(--space-2); }
   .sheet-toolbar__spacer { display: none; }
+  .sheet-search, .field--select { flex: 1 1 100%; inline-size: 100%; }
   .tool-btn { flex: 1 1 auto; justify-content: center; }
 }
 
@@ -1134,6 +1139,16 @@ button { cursor: pointer; background: none; border: 0; }
   :root { --section-y: clamp(2.75rem, 1.5rem + 6vw, 4rem); }
   .hero__actions .btn { inline-size: 100%; }
   .hero__visual { max-inline-size: 220px; min-block-size: 180px; }
+
+  /* El botón del header se reduce a su icono para que quepa junto a la marca.
+     44px es el mínimo cómodo para tocar con el dedo. */
+  .site-header .btn--primary {
+    padding: 0; display: grid; place-items: center;
+    inline-size: 44px; block-size: 44px;
+  }
+  .site-header .btn--primary .btn__label { display: none; }
+  .site-header .btn__icon { inline-size: 1.25em; block-size: 1.25em; }
+  .theme-toggle { inline-size: 44px; block-size: 44px; }
   .footer__grid { grid-template-columns: 1fr; }
   .toast-stack { inset-inline: var(--space-4); inset-block-end: var(--space-4); }
   .to-top { inline-size: 40px; block-size: 40px; }
@@ -1345,4 +1360,50 @@ button { cursor: pointer; background: none; border: 0; }
 
 @media print {
   .lightbox, #comentarios { display: none !important; }
+}
+
+/* ============================================================================
+   21. RENDER DE REFERENCIA (debajo de la tabla)
+   ========================================================================== */
+.render {
+  margin: var(--space-6) auto 0;
+  max-inline-size: 920px;
+  display: grid; gap: var(--space-3);
+}
+
+.render__frame {
+  display: block; padding: 0; inline-size: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden; cursor: zoom-in;
+  transition: transform var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-soft),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.render__frame:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.render__frame img {
+  inline-size: 100%; block-size: auto;
+  aspect-ratio: 4 / 3; object-fit: cover;
+  display: block;
+}
+
+.render__caption {
+  font-size: var(--fs-xs); color: var(--color-text-faint);
+  text-align: center; text-wrap: balance;
+}
+
+@media (max-width: 860px) {
+  .render { margin-block-start: var(--space-5); }
+  .render__frame:hover { transform: none; box-shadow: none; }
+}
+
+@media print {
+  .render__frame { break-inside: avoid; border: 1px solid #999; }
+  .render__frame:hover { transform: none; }
 }

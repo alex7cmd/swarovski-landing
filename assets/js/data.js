@@ -86,7 +86,7 @@
     rutaMiniaturas: "assets/img/thumbs/",
     // La sella tools/versionar.sh en cada publicación: al cambiar una
     // imagen cambia este valor y el navegador la vuelve a pedir.
-    versionAssets: "7ee8bdb5",
+    versionAssets: "f735f604",
     documento: {
       titulo: "Guía de artes · Swarovski",
       archivo: "Guia_Artes_Impresion_Swarovski_V1.xlsx",
