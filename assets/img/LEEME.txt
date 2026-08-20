@@ -22,3 +22,13 @@ Las miniaturas de la tabla se generan solas, no se editan a mano:
 
 Convierte cada imagen a JPEG de 400 px (~15 KB) para que la tabla cargue
 ligera. Si agregas o reemplazas una foto, corre ese comando antes de publicar.
+
+LOGOTIPOS
+---------
+  swarovski_cisne.svg   → el cisne del header
+  swarovski-logo.svg    → el logotipo del header
+
+Ojo: en el header van incrustados dentro de index.html con fill="currentColor",
+para que se pinten negros de día y blancos de noche siguiendo el tema. Estos
+archivos quedan como fuente: si cambian, hay que actualizar el marcado del
+bloque .brand en index.html.

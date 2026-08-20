@@ -413,15 +413,22 @@ button { cursor: pointer; background: none; border: 0; }
   inline-size: var(--container-wide); margin-inline: auto;
 }
 
-.brand { display: inline-flex; align-items: center; gap: var(--space-3); margin-inline-end: auto; }
-.brand__mark { inline-size: 26px; block-size: 30px; flex: none; animation: hue-drift 14s linear infinite; }
-.brand__name {
-  font-size: var(--fs-md); font-weight: 300;
-  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+.brand {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  margin-inline-end: auto; min-inline-size: 0;
+  color: var(--color-text);
 }
-.brand__sub {
-  display: block; font-size: 0.58rem; letter-spacing: .3em;
-  color: var(--color-text-faint); text-transform: uppercase;
+
+/* Ambas piezas heredan el color del texto: se ven bien en claro y en oscuro */
+.brand__swan {
+  block-size: 30px; inline-size: auto; flex: none;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.brand:hover .brand__swan { transform: translateY(-2px) scale(1.06); }
+
+.brand__wordmark {
+  block-size: 15px; inline-size: auto; min-inline-size: 0;
+  opacity: .92;
 }
 
 .nav { display: flex; align-items: center; gap: var(--space-2); }
@@ -1139,6 +1146,9 @@ button { cursor: pointer; background: none; border: 0; }
   :root { --section-y: clamp(2.75rem, 1.5rem + 6vw, 4rem); }
   .hero__actions .btn { inline-size: 100%; }
   .hero__visual { max-inline-size: 220px; min-block-size: 180px; }
+
+  .brand__swan { block-size: 26px; }
+  .brand__wordmark { block-size: 12px; }
 
   /* El botón del header se reduce a su icono para que quepa junto a la marca.
      44px es el mínimo cómodo para tocar con el dedo. */
