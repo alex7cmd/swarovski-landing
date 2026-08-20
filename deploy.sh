@@ -71,6 +71,7 @@ rsync -rlptzv --checksum $DRY \
   --exclude 'deploy.sh' \
   --exclude '.gitignore' \
   --exclude 'README.md' \
+  --exclude 'CLAUDE.md' \
   --exclude 'index.html' \
   "$LOCAL/" "$HOST:$REMOTE/"
 
