@@ -72,11 +72,18 @@
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
   --font-mono:  ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 
-  /* Escala fluida con clamp() → tipografía responsive sin media queries */
-  --fs-xs:   clamp(0.69rem, 0.66rem + 0.15vw, 0.76rem);
-  --fs-sm:   clamp(0.80rem, 0.77rem + 0.16vw, 0.88rem);
-  --fs-base: clamp(0.94rem, 0.90rem + 0.20vw, 1.03rem);
-  --fs-md:   clamp(1.06rem, 1.00rem + 0.30vw, 1.22rem);
+  /* Escala fluida con clamp() → tipografía responsive sin media queries.
+     Los mínimos siguen la referencia de iOS: cuerpo de 17 px y texto
+     secundario nunca por debajo de 12 px. */
+  --fs-xs:   clamp(0.78rem, 0.74rem + 0.16vw, 0.84rem);
+  --fs-sm:   clamp(0.90rem, 0.86rem + 0.18vw, 0.97rem);
+  --fs-base: clamp(1.02rem, 0.97rem + 0.22vw, 1.12rem);
+  --fs-md:   clamp(1.14rem, 1.06rem + 0.32vw, 1.32rem);
+
+  /* La hoja de cálculo lleva su propia escala: en escritorio es una rejilla
+     densa a propósito, y en móvil se convierte en tarjetas que sí deben
+     leerse cómodamente (se redefine en el breakpoint). */
+  --fs-sheet: clamp(0.72rem, 0.68rem + 0.18vw, 0.80rem);
   --fs-lg:   clamp(1.30rem, 1.15rem + 0.70vw, 1.70rem);
   --fs-xl:   clamp(1.70rem, 1.35rem + 1.60vw, 2.60rem);
   --fs-2xl:  clamp(2.30rem, 1.60rem + 3.20vw, 4.60rem);
@@ -764,7 +771,7 @@ button { cursor: pointer; background: none; border: 0; }
 .sheet {
   inline-size: 100%; min-inline-size: 1180px;
   border-collapse: separate; border-spacing: 0;
-  font-size: var(--fs-xs); color: var(--sheet-text);
+  font-size: var(--fs-sheet); color: var(--sheet-text);
   table-layout: fixed;
 }
 .sheet th, .sheet td {
@@ -827,8 +834,15 @@ button { cursor: pointer; background: none; border: 0; }
 .sheet-row.is-hidden { display: none; }
 
 .sheet td.is-num { font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
-.sheet td.cell-file { font-weight: 600; }
-.sheet td.cell-note { font-size: 0.66rem; color: var(--color-text-muted); line-height: 1.45; }
+.sheet td.cell-file {
+  font-weight: 600;
+  /* Nombres como mesa_lateralSpotColorPANTONE1767U.ai no traen espacios ni
+     guiones: sin esto el navegador no encuentra dónde cortar y se desbordan
+     sobre la columna vecina. */
+  overflow-wrap: anywhere;
+  hyphens: none;
+}
+.sheet td.cell-note { font-size: 0.66rem; color: var(--color-text-muted); line-height: 1.45; overflow-wrap: anywhere; }
 .sheet td.cell-qty  { font-weight: 700; color: var(--color-accent); }
 
 /* Celda activa (seleccionada con clic) */
@@ -1139,7 +1153,7 @@ button { cursor: pointer; background: none; border: 0; }
   }
   .sheet-row td {
     display: grid;
-    grid-template-columns: minmax(96px, 38%) minmax(0, 1fr);
+    grid-template-columns: minmax(84px, 30%) minmax(0, 1fr);
     gap: var(--space-3); align-items: center;
     padding: var(--space-2) var(--space-3);
     text-align: start !important;
@@ -1152,7 +1166,7 @@ button { cursor: pointer; background: none; border: 0; }
     font-size: 0.6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
     color: var(--color-text-faint);
   }
-  .sheet-row td.cell-thumb { grid-template-columns: minmax(96px, 38%) minmax(0, 1fr); }
+  .sheet-row td.cell-thumb { grid-template-columns: minmax(84px, 30%) minmax(0, 1fr); }
   .thumb { inline-size: 100%; max-inline-size: 160px; margin-inline: 0; }
   .thumb:hover { transform: none; }
   .sheet td.is-selected { box-shadow: inset 0 0 0 2px var(--color-accent); }
@@ -1498,4 +1512,48 @@ button { cursor: pointer; background: none; border: 0; }
 
 @media print {
   .aviso { break-inside: avoid; border: 1px solid #999; background: none; }
+}
+
+/* ============================================================================
+   23. LEGIBILIDAD EN MÓVIL
+   --------------------------------------------------------------------------
+   La hoja de cálculo usa tamaños densos porque en escritorio es una rejilla.
+   En móvil se convierte en tarjetas, y ahí ese mismo texto queda diminuto
+   frente a lo que acostumbra el sistema (iOS usa 17 px de cuerpo y no baja
+   de 12 px en texto secundario). Aquí se recalibra todo ese bloque.
+   ========================================================================== */
+@media (max-width: 860px) {
+  :root {
+    /* Las tarjetas ya no son rejilla: el contenido se lee, no se escanea */
+    --fs-sheet: 0.95rem;
+  }
+
+  /* --- Contenido de las tarjetas --- */
+  .sheet-row td { line-height: 1.5; }
+
+  /* La etiqueta de columna es secundaria, pero tiene que poder leerse */
+  .sheet-row td::before { font-size: 0.78rem; letter-spacing: .06em; }
+
+  .sheet td.cell-note { font-size: 0.88rem; line-height: 1.55; }
+  .sheet td.cell-file { font-size: 1rem; }
+  .chip { font-size: 0.78rem; padding: 0.4em 0.75em; }
+
+  .sheet-band-row td { font-size: 0.84rem; }
+  .sheet tfoot tr    { font-size: 0.88rem; }
+  .sheet-note        { font-size: 0.84rem; line-height: 1.55; letter-spacing: 0; }
+  .thumb__ph         { font-size: 0.72rem; }
+
+  /* --- Controles --- */
+  .tool-btn, .sheet-tab, .sheet-status { font-size: var(--fs-sm); }
+  .tool-btn { padding: 0.7em 1em; }
+  .sheet-tab { padding: 0.6em 1.1em; }
+
+  /* 16 px es el umbral por debajo del cual Safari en iOS hace zoom solo
+     al enfocar un campo. Nunca bajar de ahí en formularios. */
+  .field, .field--select, .field--area, input, select, textarea {
+    font-size: 16px;
+  }
+
+  .contact-form__label { font-size: var(--fs-md); }
+  .aviso { font-size: var(--fs-sm); }
 }
