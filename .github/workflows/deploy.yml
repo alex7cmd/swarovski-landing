@@ -53,8 +53,11 @@ jobs:
         run: |
           bash tools/versionar.sh .
           bash tools/generar-index-php.sh .
-          echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > version.txt
-          echo "Commit: $GITHUB_SHA" >> version.txt
+          {
+            echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo "Commit: $GITHUB_SHA"
+            echo "Origen: GitHub Actions (run #$GITHUB_RUN_NUMBER)"
+          } > version.txt
 
       - name: Preparar clave SSH
         env:
