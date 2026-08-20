@@ -258,6 +258,15 @@
      ========================================================================== */
   var Counters = {
     init: function () {
+      // Las cifras marcadas con data-fuente se leen de los datos, para que no
+      // haya que actualizarlas a mano cada vez que cambia la guía.
+      if (window.SW_DATA) {
+        $("[data-fuente='artes']").attr("data-count", window.SW_DATA.artes.length);
+        $("[data-fuente='piezas']").attr("data-count", $.map(window.SW_DATA.artes, function (a) {
+          return a.cantidad;
+        }).reduce(function (t, n) { return t + n; }, 0));
+      }
+
       var $counters = $("[data-count]");
       if (!$counters.length) { return; }
 

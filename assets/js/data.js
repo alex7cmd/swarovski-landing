@@ -10,14 +10,14 @@
   /** Columnas de la hoja (el orden define las letras A, B, C…). */
   var COLUMNAS = [
     { key: "no",        label: "No.",                titulo: "No.",                tipo: "num",  ancho: "48px"  },
-    { key: "archivo",   label: "Nombre del archivo", titulo: "Nombre del archivo", tipo: "text", ancho: "236px" },
-    { key: "posicion",  label: "Posición",           titulo: "Posición",           tipo: "text", ancho: "150px" },
+    { key: "archivo",   label: "Nombre del archivo", titulo: "Nombre del archivo", tipo: "text", ancho: "220px" },
+    { key: "posicion",  label: "Posición",           titulo: "Posición",           tipo: "text", ancho: "140px" },
     { key: "ancho",     label: "Ancho",              titulo: "Medidas",            tipo: "num",  ancho: "78px", grupo: 2 },
     { key: "alto",      label: "Alto",               titulo: "",                   tipo: "num",  ancho: "78px"  },
     { key: "rebase",    label: "Rebase",             titulo: "Rebase",             tipo: "text", ancho: "64px"  },
-    { key: "material",  label: "Material",           titulo: "Material",           tipo: "text", ancho: "190px" },
+    { key: "material",  label: "Material",           titulo: "Material",           tipo: "text", ancho: "230px" },
     { key: "cantidad",  label: "Cantidad",           titulo: "Cantidad",           tipo: "num",  ancho: "70px"  },
-    { key: "notas",     label: "Notas",              titulo: "Notas",              tipo: "text", ancho: "70px" },
+    { key: "notas",     label: "Notas",              titulo: "Notas",              tipo: "text", ancho: "56px" },
     { key: "img",       label: "Imagen",             titulo: "Imagen",             tipo: "img",  ancho: "96px" },
     { key: "ubicacion", label: "Ubicación",          titulo: "Ubicación",          tipo: "text", ancho: "120px" }
   ];
@@ -38,14 +38,14 @@
     { hoja: "artes",
       archivo: "swarovski-vinil-maquina-cisne-atras.ai", posicion: "PARTE TRASERA",
       ancho: "45 CM", alto: "57 CM", rebase: "—",
-      material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
       archivo: "swarovski-vinil-maquina-cisne-laterales.ai", posicion: "LATERALES",
       ancho: "32 CM", alto: "40 CM", rebase: "—",
-      material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 2, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO + CORTE A CONTORNO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "swarovski-vinil-maquina-cisne-laterales.webp", alt: "Laterales de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
@@ -73,7 +73,7 @@
     { hoja: "artes",
       archivo: "swarovski-espejo-impreso-atras.ai", posicion: "PARTE TRASERA DEL ESPEJO",
       ancho: "24 CM", alto: "36 CM", rebase: "—",
-      material: "VINIL ADHESIVO IMPRESO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-espejo-impreso-atras.webp", alt: "Parte trasera del espejo",
       ubicacion: "ESPEJO" },
 
@@ -94,7 +94,7 @@
     { hoja: "artes",
       archivo: "maquina-lateral-plasta.ai", posicion: "LATERALES",
       ancho: "75 CM", alto: "193 CM", rebase: "—",
-      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 2, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Laterales de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
@@ -115,14 +115,14 @@
     { hoja: "artes",
       archivo: "maquina-trasera-plasta.ai", posicion: "PARTE TRASERA",
       ancho: "80 CM", alto: "193 CM", rebase: "—",
-      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 1, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
       archivo: "maquina-frontal-cabecera-plasta.ai", posicion: "PARTE FRONTAL",
       ancho: "80 CM", alto: "28 CM", rebase: "—",
-      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 1, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Cabecera frontal de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
@@ -136,7 +136,7 @@
     { hoja: "artes",
       archivo: "maquina-frontal-tableroFranja.ai", posicion: "PARTE FRONTAL",
       ancho: "80 CM", alto: "10 CM", rebase: "—",
-      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO", tipo: "vinil", cantidad: 1, notas: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Franja del tablero de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
