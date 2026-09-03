@@ -50,18 +50,24 @@ def huella_carpeta(rel):
 
 cambios = []
 
-# --- 1. Las imágenes de los artes las inserta el JS, así que su versión vive
-#        en data.js. Se sella primero para que el hash de data.js ya la incluya.
+# --- 1. Las imágenes y descargas de la tabla las inserta el JS, así que sus
+#        versiones viven en data.js. Se sellan antes de calcular su propio hash.
 data_js = os.path.join(raiz, "assets/js/data.js")
 if os.path.isfile(data_js):
     v_img = huella_carpeta("assets/img")
+    v_downloads = huella_carpeta("assets/downloads")
     s = io.open(data_js, encoding="utf-8").read()
     nuevo, n = re.subn(r'(versionAssets:\s*")[^"]*(")', r'\g<1>%s\g<2>' % v_img, s)
+    nuevo, nd = re.subn(r'(versionDownloads:\s*")[^"]*(")', r'\g<1>%s\g<2>' % v_downloads, nuevo)
     if n and nuevo != s:
         io.open(data_js, "w", encoding="utf-8").write(nuevo)
         cambios.append(("assets/img/ (vía data.js)", v_img))
+        if nd:
+            cambios.append(("assets/downloads/ (vía data.js)", v_downloads))
     elif n:
         cambios.append(("assets/img/ (sin cambios)", v_img))
+        if nd:
+            cambios.append(("assets/downloads/ (sin cambios)", v_downloads))
 
 # --- 2. Referencias a assets dentro de index.html -----------------------------
 html = os.path.join(raiz, "index.html")

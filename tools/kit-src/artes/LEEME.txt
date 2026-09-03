@@ -5,8 +5,8 @@ Esta carpeta conserva la lista base de nombres del paquete principal:
   swarovski-corte-laser-maquina-frontal.ai
   swarovski-corte-laser-mesa-frontal.ai
   swarovski-corte-laser-mesa-cisne-laterales.ai
-  swarovski-espejo-impreso-atras.ai
+  swarovski-espejo-impreso-atras-curves.ai
 
-El paquete assets/downloads/swarovski-impresos.7z se mantiene manualmente.
+El paquete assets/downloads/swarovski_impresos.7z se mantiene manualmente.
 El script tools/generar-recursos.sh actualiza el CSV y las especificaciones,
 pero no modifica el archivo 7Z.

@@ -125,9 +125,10 @@ regenera automáticamente cuando cambia una imagen original.
 
 ### Agregar los archivos .ai al paquete descargable
 
-El paquete principal `assets/downloads/swarovski-impresos.7z` se mantiene a
+El paquete principal `assets/downloads/swarovski_impresos.7z` se mantiene a
 mano. Los descargables individuales también viven en `assets/downloads/` y se
-enlazan desde su tarjeta en `index.html`.
+enlazan desde el nombre del archivo en la tabla mediante `descarga` en
+`assets/js/data.js`.
 
 ---
 

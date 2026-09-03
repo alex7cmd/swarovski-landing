@@ -478,22 +478,35 @@
 
     /** HTML de una fila de arte. */
     rowHtml: function (a) {
-      // La versión rompe la caché del navegador cuando se reemplaza una imagen
+      // Las versiones rompen la caché cuando se reemplaza una imagen o paquete.
       var v = this.data.versionAssets ? "?v=" + this.data.versionAssets : "",
+          vd = this.data.versionDownloads ? "?v=" + this.data.versionDownloads : "",
           // La tabla carga la miniatura (~15 KB); la foto completa solo se
           // descarga si alguien abre el pop-up.
           mini = a.mini
             ? (this.data.rutaImagenes || "") + a.mini + v
             : (this.data.rutaMiniaturas || "") + a.img.replace(/\.[^.]+$/, ".jpg") + v,
           src = (this.data.rutaImagenes || "") + a.img + v,
-          meta = a.posicion + " · " + a.ancho + " × " + a.alto + " · " + a.material;
+          meta = a.posicion + " · " + a.ancho + " × " + a.alto + " · " + a.material,
+          nombrePaquete = a.descarga ? a.descarga.split("/").pop() : "",
+          archivoHtml = a.descarga
+            ? '<a class="file-download" href="' + Util.esc(a.descarga + vd) + '"' +
+                ' download="' + Util.esc(nombrePaquete) + '" data-download' +
+                ' data-filename="' + Util.esc(nombrePaquete) + '" data-label="Archivo individual"' +
+                ' aria-label="Descargar ' + Util.esc(a.archivo) + '" title="Descargar archivo individual">' +
+                '<span class="file-download__name">' + Util.esc(a.archivo) + '</span>' +
+                '<span class="file-download__icon" aria-hidden="true">' +
+                  '<svg><use href="#i-download"></use></svg>' +
+                '</span>' +
+              '</a>'
+            : Util.esc(a.archivo);
 
       return '<tr class="sheet-row" data-hoja="' + a.hoja + '" data-material="' + Util.esc(a.material) + '"' +
                 ' data-tipo="' + a.tipo + '" data-cantidad="' + a.cantidad + '"' +
                 ' data-archivo="' + Util.esc(a.archivo) + '">' +
         '<th class="rownum" scope="row"></th>' +
         '<td class="is-num cell-no" data-label="No."></td>' +
-        '<td class="is-left cell-file" data-label="Archivo">' + Util.esc(a.archivo) + "</td>" +
+        '<td class="is-left cell-file" data-label="Archivo">' + archivoHtml + "</td>" +
         '<td class="is-left" data-label="Posición">' + Util.esc(a.posicion) + "</td>" +
         '<td class="is-num" data-label="Ancho">' + Util.esc(a.ancho) + "</td>" +
         '<td class="is-num" data-label="Alto">' + Util.esc(a.alto) + "</td>" +
@@ -549,7 +562,7 @@
       });
 
       this.$body.on("click", "td", function (e) {
-        if ($(e.target).closest(".thumb").length) { return; }
+        if ($(e.target).closest(".thumb, .file-download").length) { return; }
         self.selectCell($(this));
       });
 

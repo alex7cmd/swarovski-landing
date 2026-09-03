@@ -41,7 +41,7 @@ cp tools/kit-src/*.txt "$BUILD/"
 mkdir -p "$BUILD/artes"
 cp -R tools/kit-src/artes/. "$BUILD/artes/"
 
-# El paquete que descarga el usuario es swarovski-impresos.7z, que se
+# El paquete que descarga el usuario es swarovski_impresos.7z, que se
 # mantiene a mano. Aquí solo se refrescan el CSV y las especificaciones.
 mkdir -p "$OUT"
 cp "$BUILD/Guia_Artes_Swarovski.csv" "$OUT/"

@@ -37,6 +37,7 @@
   var ARTES = [
     { hoja: "artes",
       archivo: "swarovski-vinil-maquina-cisne-atras.ai", posicion: "PARTE TRASERA",
+      descarga: "assets/downloads/swarovski-vinil-maquina-cisne-atras.ai.7z",
       ancho: "45 CM", alto: "57 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra",
@@ -44,6 +45,7 @@
 
     { hoja: "artes",
       archivo: "swarovski-vinil-maquina-cisne-laterales.ai", posicion: "LATERALES",
+      descarga: "assets/downloads/swarovski-vinil-maquina-cisne-laterales.ai.7z",
       ancho: "32 CM", alto: "40 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO + CORTE A CONTORNO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "swarovski-vinil-maquina-cisne-laterales.webp", alt: "Laterales de la máquina garra",
@@ -51,6 +53,7 @@
 
     { hoja: "artes",
       archivo: "swarovski-corte-laser-maquina-frontal.ai", posicion: "FRONTAL / CABECERA",
+      descarga: "assets/downloads/swarovski-corte-laser-maquina-frontal.ai.7z",
       ancho: "37 CM", alto: "5 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 1, notas: "—",
       img: "swarovski-corte-laser-maquina-frontal.webp", alt: "Frontal y cabecera de la máquina garra",
@@ -58,6 +61,7 @@
 
     { hoja: "artes",
       archivo: "swarovski-corte-laser-mesa-frontal.ai", posicion: "FRONTAL",
+      descarga: "assets/downloads/swarovski-corte-laser-mesa-frontal.ai.7z",
       ancho: "45 CM", alto: "6 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 1, notas: "—",
       img: "swarovski-corte-laser-mesa-frontal.webp", alt: "Frontal de la mesa de escritorio",
@@ -65,13 +69,15 @@
 
     { hoja: "artes",
       archivo: "swarovski-corte-laser-mesa-cisne-laterales.ai", posicion: "LATERALES",
+      descarga: "assets/downloads/swarovski-corte-laser-mesa-cisne-laterales.ai.7z",
       ancho: "24 CM", alto: "30 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 2, notas: "—",
       img: "swarovski-corte-laser-mesa-cisne-laterales.webp", alt: "Laterales de la mesa de escritorio",
       ubicacion: "MESA DE ESCRITORIO" },
 
     { hoja: "artes",
-      archivo: "swarovski-espejo-impreso-atras.ai", posicion: "PARTE TRASERA DEL ESPEJO",
+      archivo: "swarovski-espejo-impreso-atras-curves.ai", posicion: "PARTE TRASERA DEL ESPEJO",
+      descarga: "assets/downloads/swarovski-espejo-impreso-atras-curves.ai.7z",
       ancho: "24 CM", alto: "36 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO + CORTE A CONTORNO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-espejo-impreso-atras.webp", alt: "Parte trasera del espejo",
@@ -79,6 +85,7 @@
 
     { hoja: "artes",
       archivo: "mesa_SpotColorPANTONE1767U.ai", posicion: "PARTE FRONTAL Y TRASERA",
+      descarga: "assets/downloads/mesa_SpotColorPANTONE1767U.ai.7z",
       ancho: "107 CM", alto: "71.1 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "swarovski-corte-laser-mesa-cisne-laterales.webp", alt: "Mesa de escritorio, frente y trasera",
@@ -86,6 +93,7 @@
 
     { hoja: "artes",
       archivo: "mesa_lateralSpotColorPANTONE1767U.ai", posicion: "LATERALES",
+      descarga: "assets/downloads/mesa_lateralSpotColorPANTONE1767U.ai.7z",
       ancho: "40 CM", alto: "60 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "swarovski-corte-laser-mesa-cisne-laterales.webp", alt: "Laterales de la mesa de escritorio",
@@ -93,6 +101,7 @@
 
     { hoja: "artes",
       archivo: "maquina-lateral-plasta.ai", posicion: "LATERALES",
+      descarga: "assets/downloads/maquina-lateral-plasta.ai.7z",
       ancho: "75 CM", alto: "193 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
       img: "maquina-garra-lateral.webp", alt: "Lateral de la máquina garra",
@@ -100,6 +109,7 @@
 
     { hoja: "artes",
       archivo: "maquina-lateral-plasta-opacidad.ai", posicion: "LATERALES",
+      descarga: "assets/downloads/maquina-lateral-plasta-opacidad.ai.7z",
       ancho: "59 CM", alto: "152 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 2, notas: "—",
       img: "maquina-garra-lateral.webp", alt: "Lateral de la máquina garra",
@@ -107,6 +117,7 @@
 
     { hoja: "artes",
       archivo: "maquina-trasera-opacidad.ai", posicion: "PARTE TRASERA",
+      descarga: "assets/downloads/maquina-trasera-opacidad.ai.7z",
       ancho: "64 CM", alto: "152 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra en vinil transparente",
@@ -114,6 +125,7 @@
 
     { hoja: "artes",
       archivo: "maquina-trasera-plasta.ai", posicion: "PARTE TRASERA",
+      descarga: "assets/downloads/maquina-trasera-plasta.ai.7z",
       ancho: "80 CM", alto: "193 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "swarovski-vinil-maquina-cisne-atras.webp", alt: "Parte trasera de la máquina garra",
@@ -121,6 +133,7 @@
 
     { hoja: "artes",
       archivo: "maquina-frontal-cabecera-plasta.ai", posicion: "PARTE FRONTAL",
+      descarga: "assets/downloads/maquina-frontal-cabecera-plasta.ai.7z",
       ancho: "80 CM", alto: "28 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "maquina-garra-frontal.webp", alt: "Frente de la máquina garra",
@@ -128,6 +141,7 @@
 
     { hoja: "artes",
       archivo: "maquina-frontal-cristalSuperior-opacidad.ai", posicion: "PARTE FRONTAL",
+      descarga: "assets/downloads/maquina-frontal-cristalSuperior-opacidad.ai.7z",
       ancho: "80 CM", alto: "78 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
       img: "maquina-garra-frontal.webp", alt: "Frente de la máquina garra",
@@ -135,6 +149,7 @@
 
     { hoja: "artes",
       archivo: "maquina-frontal-tableroFranja.ai", posicion: "PARTE FRONTAL",
+      descarga: "assets/downloads/maquina-frontal-tableroFranja.ai.7z",
       ancho: "80 CM", alto: "10 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
       img: "maquina-garra-frontal.webp", alt: "Frente de la máquina garra",
@@ -142,13 +157,15 @@
 
     { hoja: "artes",
       archivo: "maquina-frontal-inferior-opacidad.ai", posicion: "PARTE FRONTAL",
+      descarga: "assets/downloads/maquina-frontal-inferior-opacidad.ai.7z",
       ancho: "80 CM", alto: "58 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
       img: "maquina-garra-frontal.webp", alt: "Frente de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
-      archivo: "swarovski-impreso-curves.ai.7z", posicion: "—",
+      archivo: "swarovski-impreso-curves.ai", posicion: "—",
+      descarga: "assets/downloads/swarovski_impreso_curves_.ai.7z",
       ancho: "TABLOIDE", alto: "—", rebase: "—",
       material: "FORMATO AI", tipo: "ai", cantidad: 1, notas: "DESCARGA DIRECTA .7Z",
       img: "thumbs/swarovski-impreso-curves.webp", mini: "thumbs/swarovski-impreso-curves.webp",
@@ -165,6 +182,8 @@
     // La sella tools/versionar.sh en cada publicación: al cambiar una
     // imagen cambia este valor y el navegador la vuelve a pedir.
     versionAssets: "5ae1dfc2",
+    // Hace lo mismo con los paquetes enlazados dinámicamente desde la tabla.
+    versionDownloads: "82f7cc66",
     documento: {
       titulo: "Guía de artes · Swarovski",
       archivo: "Guia_Artes_Impresion_Swarovski_V1.xlsx",
