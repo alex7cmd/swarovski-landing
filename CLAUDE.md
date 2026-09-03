@@ -131,7 +131,7 @@ al abrir el pop-up.
 
 ### El umbral de la animación de entrada va en 0
 
-Iba en `threshold: 0.08` (8% del bloque visible). Al crecer la tabla a 16 artes,
+Iba en `threshold: 0.08` (8% del bloque visible). Al crecer la tabla,
 en móvil el bloque midió más de 10 000 px y en una pantalla de 844 px el máximo
 alcanzable es 7%: **el contenido quedó invisible en todos los teléfonos**.
 
@@ -194,7 +194,7 @@ versionado se encarga de la caché.
 
 ## Estado actual
 
-- 16 artes, 22 piezas, 4 materiales, una sola hoja llamada «Artes».
+- 17 artes, 23 piezas, 5 materiales, una sola hoja llamada «Artes».
 - Faltan fotos propias para las dos filas de **parte trasera** de la máquina
   garra (11 y 12); usan la foto anterior mientras tanto.
 - La sección de especificaciones técnicas está **oculta** con el atributo

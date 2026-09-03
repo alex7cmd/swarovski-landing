@@ -207,7 +207,7 @@
       // El umbral va en 0: basta con que asome un pixel. Con un porcentaje,
       // un bloque más alto que la pantalla nunca llega a cumplirlo y se queda
       // invisible para siempre — que es justo lo que pasó cuando la tabla
-      // creció a 16 artes y midió más de 10 000 px en móvil.
+      // creció y pasó a medir más de 10 000 px en móvil.
       if ("IntersectionObserver" in window) {
         var io = new window.IntersectionObserver(function (entries) {
           entries.forEach(function (entry) {
@@ -326,7 +326,7 @@
   /* ==========================================================================
      6. Pop-up de imágenes (lightbox)
      --------------------------------------------------------------------------
-     Mientras la imagen real no exista en assets/img/artes/, el marco muestra
+     Mientras la imagen real no exista en assets/img/, el marco muestra
      el nombre exacto que debe tener el archivo. Al subirla aparece sola.
      ========================================================================== */
   var Lightbox = {
@@ -482,7 +482,9 @@
       var v = this.data.versionAssets ? "?v=" + this.data.versionAssets : "",
           // La tabla carga la miniatura (~15 KB); la foto completa solo se
           // descarga si alguien abre el pop-up.
-          mini = (this.data.rutaMiniaturas || "") + a.img.replace(/\.[^.]+$/, ".jpg") + v,
+          mini = a.mini
+            ? (this.data.rutaImagenes || "") + a.mini + v
+            : (this.data.rutaMiniaturas || "") + a.img.replace(/\.[^.]+$/, ".jpg") + v,
           src = (this.data.rutaImagenes || "") + a.img + v,
           meta = a.posicion + " · " + a.ancho + " × " + a.alto + " · " + a.material;
 

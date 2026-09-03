@@ -95,11 +95,11 @@ swarovski-landing/
 │   ├── js/
 │   │   ├── data.js          ← FUENTE DE VERDAD: las artes y las columnas
 │   │   └── main.js          Tema, hoja de cálculo, pop-up, formulario, descargas
-│   ├── img/artes/           Imágenes de cada arte (ver su LEEME.txt)
+│   ├── img/                 Imágenes originales y miniaturas de cada arte
 │   ├── vendor/              Respaldo local de jQuery
 │   └── downloads/           ZIP y CSV que descarga el usuario
 └── tools/
-    ├── generar-recursos.sh  Regenera ZIP y CSV
+    ├── generar-recursos.sh  Regenera CSV y especificaciones descargables
     └── kit-src/             Contenido del ZIP (textos + carpeta artes/)
 ```
 
@@ -113,19 +113,21 @@ Se edita **solo** `assets/js/data.js`. La tabla, el filtro de materiales, los
 totales, la barra de estado y el CSV se recalculan solos.
 
 ```bash
-bash tools/generar-recursos.sh   # actualiza el ZIP y el CSV descargables
+bash tools/generar-recursos.sh   # actualiza el CSV descargable
 bash deploy.sh
 ```
 
 ### Subir la imagen de un arte
 
-Deja el archivo en `assets/img/artes/` con el nombre exacto que indica
-`assets/img/artes/LEEME.txt` (p. ej. `01-maquina-garra-trasera.jpg`).
-La miniatura y el pop-up lo toman solos, sin tocar código.
+Deja el original en `assets/img/` con el nombre indicado en `assets/js/data.js`.
+Las miniaturas JPG de 400 px viven en `assets/img/thumbs/`; el despliegue las
+regenera automáticamente cuando cambia una imagen original.
 
 ### Agregar los archivos .ai al paquete descargable
 
-Cópialos en `tools/kit-src/artes/` y ejecuta `bash tools/generar-recursos.sh`.
+El paquete principal `assets/downloads/swarovski-impresos.7z` se mantiene a
+mano. Los descargables individuales también viven en `assets/downloads/` y se
+enlazan desde su tarjeta en `index.html`.
 
 ---
 

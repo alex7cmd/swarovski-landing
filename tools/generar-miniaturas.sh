@@ -12,11 +12,11 @@
 #
 # Usa sips, que viene con macOS: no hay que instalar nada.
 #
-# Uso:  bash tools/generar-miniaturas.sh
+# Uso:  bash tools/generar-miniaturas.sh [carpeta]
 # ------------------------------------------------------------------------------
 set -euo pipefail
 
-RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+RAIZ="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 ORIGEN="$RAIZ/assets/img"
 DESTINO="$ORIGEN/thumbs"
 ANCHO=400

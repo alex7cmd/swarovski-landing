@@ -28,6 +28,18 @@ esac
 DRY=""
 [ "${1:-}" = "--dry-run" ] && DRY="--dry-run"
 
+# La simulación trabaja sobre una copia temporal: no reescribe index.html,
+# index.php, version.txt ni las miniaturas del proyecto.
+SOURCE="$LOCAL"
+BUILD=""
+if [ -n "$DRY" ]; then
+  BUILD="$(mktemp -d)"
+  trap 'rm -rf "$BUILD"' EXIT
+  echo "→ Preparando copia temporal para la simulación"
+  rsync -a --exclude '.git/' "$LOCAL/" "$BUILD/"
+  SOURCE="$BUILD"
+fi
+
 echo "→ Verificando conexión con $HOST"
 if ! ssh -o BatchMode=yes -o ConnectTimeout=15 "$HOST" 'exit' 2>/dev/null; then
   cat >&2 <<'MSG'
@@ -42,22 +54,26 @@ fi
 
 echo "→ Comprobando la carpeta remota"
 if ! ssh "$HOST" "[ -d \"\$HOME/$REMOTE\" ]"; then
-  echo "  · No existe ~/$REMOTE — se creará"
-  ssh "$HOST" "mkdir -p \"\$HOME/$REMOTE\""
+  if [ -n "$DRY" ]; then
+    echo "  · No existe ~/$REMOTE — se crearía en una publicación real"
+  else
+    echo "  · No existe ~/$REMOTE — se creará"
+    ssh "$HOST" "mkdir -p \"\$HOME/$REMOTE\""
+  fi
 fi
 
 echo "→ Generando miniaturas"
-bash "$LOCAL/tools/generar-miniaturas.sh"
+bash "$LOCAL/tools/generar-miniaturas.sh" "$SOURCE"
 
 echo "→ Sellando assets con su versión"
-bash "$LOCAL/tools/versionar.sh" "$LOCAL"
-bash "$LOCAL/tools/generar-index-php.sh" "$LOCAL"
+bash "$LOCAL/tools/versionar.sh" "$SOURCE"
+bash "$LOCAL/tools/generar-index-php.sh" "$SOURCE"
 
 {
   echo "Publicado el $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
   echo "Commit: $(git -C "$LOCAL" rev-parse --short HEAD 2>/dev/null || echo 'sin git')"
   echo "Origen: deploy.sh (manual)"
-} > "$LOCAL/version.txt"
+} > "$SOURCE/version.txt"
 
 echo "→ Sincronizando${DRY:+ (simulación)}"
 rsync -rlptzv --checksum $DRY \
@@ -73,7 +89,11 @@ rsync -rlptzv --checksum $DRY \
   --exclude 'README.md' \
   --exclude 'CLAUDE.md' \
   --exclude 'index.html' \
-  "$LOCAL/" "$HOST:$REMOTE/"
+  "$SOURCE/" "$HOST:$REMOTE/"
 
 echo
-echo "✓ Publicado en https://www.commandigital.biz/share/swarovski/index.html"
+if [ -n "$DRY" ]; then
+  echo "✓ Simulación completada; no se modificaron el proyecto ni el servidor"
+else
+  echo "✓ Publicado en https://www.commandigital.biz/share/swarovski/index.html"
+fi

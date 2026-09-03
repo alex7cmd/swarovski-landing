@@ -22,10 +22,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&family=Inter:wght@200;300;400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&amp;family=Inter:wght@200;300;400;500;600;700;800&amp;display=swap">
 
-  <link rel="preload" href="assets/css/styles.css?v=975c7b66" as="style">
-  <link rel="stylesheet" href="assets/css/styles.css?v=975c7b66">
+  <link rel="preload" href="assets/css/styles.css?v=809096f4" as="style">
+  <link rel="stylesheet" href="assets/css/styles.css?v=809096f4">
 
   <!-- Tema antes del primer pintado: automático según la hora, como iOS/macOS -->
   <script>
@@ -434,7 +434,7 @@
 
         <figure class="render reveal">
           <button type="button" class="render__frame" data-lightbox
-                  data-img="assets/img/render.webp"
+                  data-img="assets/img/render.webp?v=d6fdc147"
                   data-titulo="Render del montaje"
                   data-meta="Referencia de cómo se ven las piezas aplicadas">
             <img src="assets/img/render.webp?v=d6fdc147" alt="Render del montaje con las piezas aplicadas"
@@ -448,16 +448,72 @@
         <noscript>
           <p class="sheet-note">
             Esta guía se construye con JavaScript. Actívalo o descarga el
-            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=108270b3">CSV de la guía</a>.
+            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=169403db">CSV de la guía</a>.
           </p>
         </noscript>
       </div>
     </section>
 
     <!-- ===================================================================
+         DESCARGAS DIRECTAS
+         =================================================================== -->
+    <section class="section section--alt" id="descargas">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Archivo listo para descargar</p>
+            <h2 class="section-title">Descargas <strong>directas</strong></h2>
+            <p class="section-lead">
+              Abre la vista previa del arte y descarga el archivo editable en formato AI.
+            </p>
+          </div>
+        </div>
+
+        <div class="download-cards">
+          <article class="download-card reveal">
+            <button type="button" class="download-card__preview" data-lightbox
+                    data-img="assets/img/thumbs/swarovski-impreso-curves.webp?v=19f499f7"
+                    data-titulo="swarovski-impreso-curves.ai"
+                    data-meta="Formato AI · Tamaño tabloide">
+              <img src="assets/img/thumbs/swarovski-impreso-curves.webp?v=19f499f7"
+                   alt="Vista previa del arte Swarovski impreso en curvas, tamaño tabloide"
+                   loading="lazy" decoding="async" width="6016" height="3384">
+              <span class="download-card__zoom">
+                <svg aria-hidden="true"><use href="#i-image"></use></svg>
+                Ver imagen
+              </span>
+            </button>
+
+            <div class="download-card__body">
+              <span class="chip chip--ai">Formato AI</span>
+              <h3 class="download-card__title">Swarovski impreso · curvas</h3>
+              <p class="download-card__text">
+                Archivo editable preparado en tamaño tabloide y comprimido en formato 7Z.
+              </p>
+
+              <ul class="download-card__meta">
+                <li><span>Tamaño</span><b>Tabloide</b></li>
+                <li><span>Contenido</span><b>Archivo AI</b></li>
+                <li><span>Peso</span><b>1.9 MB</b></li>
+              </ul>
+
+              <a class="btn btn--primary download-card__button"
+                 href="assets/downloads/swarovski-impreso-curves.ai.7z?v=9d5696e0"
+                 data-download data-filename="swarovski-impreso-curves.ai.7z"
+                 data-label="Swarovski impreso en curvas">
+                <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
+                <span class="btn__label">Descargar AI</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
          COMENTARIOS
          =================================================================== -->
-    <section class="section section--alt" id="comentarios">
+    <section class="section" id="comentarios">
       <div class="container">
         <div class="contact-card reveal">
           <div class="contact-card__intro">
@@ -476,7 +532,7 @@
             </label>
 
             <textarea class="field field--area" id="comentario" name="mensaje" rows="4"
-                      placeholder="Ej.: el arte swarovski-corte-laser.ai debe medir 40 cm de ancho, no 37."
+                      placeholder="Ej.: el arte swarovski-corte-laser-maquina-frontal.ai debe medir 40 cm de ancho, no 37."
                       required minlength="5"></textarea>
 
             <!-- Trampa antispam: invisible para personas -->
@@ -547,7 +603,7 @@
       '<script src="assets/vendor/jquery-3.7.1.min.js?v=2c872dbe"><\/script>'
     );
   </script>
-  <script src="assets/js/data.js?v=17af685b"></script>
-  <script src="assets/js/main.js?v=245c4c7a"></script>
+  <script src="assets/js/data.js?v=f80ff226"></script>
+  <script src="assets/js/main.js?v=9b3a4211"></script>
 </body>
 </html>

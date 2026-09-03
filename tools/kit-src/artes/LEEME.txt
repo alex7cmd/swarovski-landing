@@ -1,14 +1,12 @@
-Coloca aquí los archivos originales de los 6 artes:
+Esta carpeta conserva la lista base de nombres del paquete principal:
 
   swarovski-vinil-maquina-cisne-atras.ai
   swarovski-vinil-maquina-cisne-laterales.ai
-  swarovski-corte-laser.ai
+  swarovski-corte-laser-maquina-frontal.ai
   swarovski-corte-laser-mesa-frontal.ai
   swarovski-corte-laser-mesa-cisne-laterales.ai
   swarovski-espejo-impreso-atras.ai
 
-Después ejecuta, desde la raíz del proyecto:
-
-  bash tools/generar-recursos.sh
-
-y el ZIP de la landing quedará actualizado con los archivos reales.
+El paquete assets/downloads/swarovski-impresos.7z se mantiene manualmente.
+El script tools/generar-recursos.sh actualiza el CSV y las especificaciones,
+pero no modifica el archivo 7Z.

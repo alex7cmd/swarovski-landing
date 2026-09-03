@@ -31,7 +31,7 @@
    * Artes de impresión.
    *
    * `img` es el nombre del archivo que se mostrará en la miniatura y en el pop-up.
-   * Basta con colocar la imagen real en `assets/img/artes/` con ese mismo nombre:
+   * Basta con colocar la imagen real en `assets/img/` con ese mismo nombre:
    * mientras no exista, se muestra el marco "pendiente" y todo sigue funcionando.
    */
   var ARTES = [
@@ -50,7 +50,7 @@
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
-      archivo: "swarovski-corte-laser.ai", posicion: "FRONTAL / CABECERA",
+      archivo: "swarovski-corte-laser-maquina-frontal.ai", posicion: "FRONTAL / CABECERA",
       ancho: "37 CM", alto: "5 CM", rebase: "—",
       material: "CORTE LASER", tipo: "laser", cantidad: 1, notas: "—",
       img: "swarovski-corte-laser-maquina-frontal.webp", alt: "Frontal y cabecera de la máquina garra",
@@ -145,7 +145,15 @@
       ancho: "80 CM", alto: "58 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
       img: "maquina-garra-frontal.webp", alt: "Frente de la máquina garra",
-      ubicacion: "MAQUINA GARRA" }
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
+      archivo: "swarovski-impreso-curves.ai.7z", posicion: "—",
+      ancho: "TABLOIDE", alto: "—", rebase: "—",
+      material: "FORMATO AI", tipo: "ai", cantidad: 1, notas: "DESCARGA DIRECTA .7Z",
+      img: "thumbs/swarovski-impreso-curves.webp", mini: "thumbs/swarovski-impreso-curves.webp",
+      alt: "Vista previa del arte Swarovski impreso en curvas, tamaño tabloide",
+      ubicacion: "—" }
   ];
 
   window.SW_DATA = {
@@ -156,7 +164,7 @@
     rutaMiniaturas: "assets/img/thumbs/",
     // La sella tools/versionar.sh en cada publicación: al cambiar una
     // imagen cambia este valor y el navegador la vuelve a pedir.
-    versionAssets: "7173cd57",
+    versionAssets: "5ae1dfc2",
     documento: {
       titulo: "Guía de artes · Swarovski",
       archivo: "Guia_Artes_Impresion_Swarovski_V1.xlsx",

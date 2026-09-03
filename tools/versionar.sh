@@ -67,7 +67,7 @@ if os.path.isfile(data_js):
 html = os.path.join(raiz, "index.html")
 s = io.open(html, encoding="utf-8").read()
 
-patron = re.compile(r'(?P<attr>href|src)="(?P<ruta>assets/[^"?#]+)(?:\?v=[0-9a-f]+)?"')
+patron = re.compile(r'(?P<attr>href|src|data-img)="(?P<ruta>assets/[^"?#]+)(?:\?v=[0-9a-f]+)?"')
 
 def reemplazo(m):
     ruta = m.group("ruta")
