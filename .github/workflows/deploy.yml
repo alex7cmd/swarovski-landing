@@ -93,7 +93,6 @@ jobs:
             -e "ssh -i ~/.ssh/deploy_key -p $SSH_PORT" \
             --exclude '.git/' --exclude '.github/' --exclude '.vscode/' \
             --exclude '.DS_Store' --exclude 'node_modules/' \
-            --exclude 'assets/downloads/swarovski-impresos/' \
             --exclude 'tools/' --exclude 'deploy.sh' \
             --exclude '.gitignore' --exclude 'README.md' --exclude 'CLAUDE.md' \
             --exclude 'index.html' \

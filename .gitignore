@@ -18,6 +18,3 @@ node_modules/
 # Los genera cada publicación
 version.txt
 index.php
-
-# Copia local sin comprimir usada para preparar los paquetes 7Z
-assets/downloads/swarovski-impresos/

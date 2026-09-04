@@ -519,7 +519,7 @@
             ' data-img="' + Util.esc(src) + '"' +
             ' data-titulo="' + Util.esc(a.archivo) + '"' +
             ' data-meta="' + Util.esc(meta) + '">' +
-            '<img class="thumb__img" src="' + Util.esc(mini) + '" alt="' + Util.esc(a.alt) + '" loading="lazy" decoding="async">' +
+            '<img class="thumb__img" src="' + Util.esc(mini) + '" alt="' + Util.esc(a.alt) + '" loading="eager" decoding="async">' +
             '<span class="thumb__ph"><svg aria-hidden="true"><use href="#i-image"></use></svg>Ver imagen</span>' +
           "</button>" +
         "</td>" +

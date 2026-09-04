@@ -82,7 +82,6 @@ rsync -rlptzv --checksum $DRY \
   --exclude '.github/' \
   --exclude '.vscode/' \
   --exclude '.DS_Store' \
-  --exclude 'assets/downloads/swarovski-impresos/' \
   --exclude 'node_modules/' \
   --exclude 'tools/' \
   --exclude 'deploy.sh' \

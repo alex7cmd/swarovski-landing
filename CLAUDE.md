@@ -81,7 +81,7 @@ swarovski-landing/
 │   │   └── main.js          Módulos: tema, hoja, pop-up, formulario
 │   ├── img/                 Fotos originales + /thumbs generadas
 │   ├── vendor/              Respaldo local de jQuery 3.7.1
-│   └── downloads/           swarovski_impresos.7z + CSV
+│   └── downloads/           swarovski-impresos/all-resources.7z + CSV
 └── tools/
     ├── versionar.sh         Sella assets con ?v=<hash>
     ├── generar-index-php.sh Envuelve index.html en PHP al publicar
@@ -187,7 +187,7 @@ bash tools/generar-miniaturas.sh
 
 ### Actualizar el paquete descargable
 
-Reemplaza `assets/downloads/swarovski_impresos.7z` conservando el nombre. El
+Reemplaza `assets/downloads/swarovski-impresos/all-resources.7z` conservando el nombre. El
 versionado se encarga de la caché.
 
 ---
