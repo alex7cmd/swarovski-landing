@@ -194,7 +194,7 @@ versionado se encarga de la caché.
 
 ## Estado actual
 
-- 17 artes, 23 piezas, 5 materiales, una sola hoja llamada «Artes».
+- 21 artes, 27 piezas, 6 materiales, una sola hoja llamada «Artes».
 - Faltan fotos propias para las dos filas de **parte trasera** de la máquina
   garra (11 y 12); usan la foto anterior mientras tanto.
 - La sección de especificaciones técnicas está **oculta** con el atributo

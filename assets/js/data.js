@@ -100,11 +100,22 @@
       ubicacion: "MESA DE ESCRITORIO" },
 
     { hoja: "artes",
+      archivo: "swarovski-cubierta.ai", posicion: "ARRIBA DE LA MESA",
+      descarga: "assets/downloads/swarovski-impresos/swarovski-mesa/swarovski-cubierta.ai.7z",
+      ancho: "51 CM", alto: "115 CM", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO EN PANTONE 1767 U + LAMINADO MATE", tipo: "vinil", cantidad: 1,
+      notas: "VALIDAR PLANTILLA Y MEDIDAS SOBRE LA MESA ANTES DE PRODUCIR",
+      img: ["swarovski-cubierta.webp", "swarovski-mesa-escritorio.webp"],
+      mini: "thumbs/swarovski-cubierta.webp", alt: "Cubierta superior de la mesa de escritorio",
+      ubicacion: "MESA DE ESCRITORIO" },
+
+    { hoja: "artes",
       archivo: "maquina-lateral-plasta.ai", posicion: "LATERALES",
       descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/maquina-lateral-plasta.ai.7z",
       ancho: "75 CM", alto: "193 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 2, notas: "—",
-      img: "thumbs/lateral maquina.webp", mini: "thumbs/lateral maquina.webp", alt: "Medidas y referencia lateral de la máquina garra",
+      img: ["thumbs/lateral-maquina.webp", "maquina-garra-lateral.webp"],
+      mini: "thumbs/lateral-maquina.webp", alt: "Medidas y referencia lateral de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
@@ -112,7 +123,8 @@
       descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/maquina-lateral-plasta-opacidad.ai.7z",
       ancho: "59 CM", alto: "152 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 2, notas: "—",
-      img: "thumbs/lateral maquina.webp", mini: "thumbs/lateral maquina.webp", alt: "Medidas y referencia lateral de la máquina garra",
+      img: ["thumbs/lateral-maquina.webp", "maquina-garra-lateral.webp"],
+      mini: "thumbs/lateral-maquina.webp", alt: "Medidas y referencia lateral de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
@@ -120,7 +132,8 @@
       descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/maquina-trasera-opacidad.ai.7z",
       ancho: "64 CM", alto: "152 CM", rebase: "—",
       material: "VINIL TRANSPARENTE IMPRESO", tipo: "transparente", cantidad: 1, notas: "—",
-      img: "thumbs/atras-maquina.webp", mini: "thumbs/atras-maquina.webp", alt: "Medidas y referencia trasera de la máquina garra en vinil transparente",
+      img: ["thumbs/atras-maquina.webp", "swarovski-vinil-maquina-cisne-atras.webp"],
+      mini: "thumbs/atras-maquina.webp", alt: "Medidas y referencia trasera de la máquina garra en vinil transparente",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
@@ -128,7 +141,8 @@
       descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/maquina-trasera-plasta.ai.7z",
       ancho: "80 CM", alto: "193 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
-      img: "thumbs/atras-maquina.webp", mini: "thumbs/atras-maquina.webp", alt: "Medidas y referencia trasera de la máquina garra",
+      img: ["thumbs/atras-maquina.webp", "swarovski-vinil-maquina-cisne-atras.webp"],
+      mini: "thumbs/atras-maquina.webp", alt: "Medidas y referencia trasera de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
@@ -164,6 +178,16 @@
       ubicacion: "MAQUINA GARRA" },
 
     { hoja: "artes",
+      archivo: "marco-frontal-maquina.ai", posicion: "MARCO FRONTAL",
+      descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/marco-frontal-maquina.ai.7z",
+      ancho: "—", alto: "—", rebase: "—",
+      material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1,
+      notas: "MEDIDAS PENDIENTES DE CONFIRMAR",
+      img: "thumbs/frente-maquina.webp", mini: "thumbs/frente-maquina.webp",
+      alt: "Marco frontal de la máquina garra",
+      ubicacion: "MAQUINA GARRA" },
+
+    { hoja: "artes",
       archivo: "cuadro-dentro-maquina.ai", posicion: "DENTRO DE LA MÁQUINA",
       descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/cuadro-dentro-maquina.ai.7z",
       ancho: "70 CM", alto: "95 CM", rebase: "—",
@@ -177,7 +201,7 @@
       descarga: "assets/downloads/swarovski-impresos/swarovski-maquina-garra/frente-maquina.ai.7z",
       ancho: "78 CM", alto: "163 CM", rebase: "—",
       material: "VINIL AUTOADHERIBLE BLANCO IMPRESO + LAMINADO SATINADO", tipo: "vinil", cantidad: 1, notas: "—",
-      img: "thumbs/frente maquina.webp", mini: "thumbs/frente maquina.webp",
+      img: "thumbs/frente-maquina.webp", mini: "thumbs/frente-maquina.webp",
       alt: "Medidas y referencia frontal de la máquina garra",
       ubicacion: "MAQUINA GARRA" },
 
@@ -199,9 +223,9 @@
     rutaMiniaturas: "assets/img/thumbs/",
     // La sella tools/versionar.sh en cada publicación: al cambiar una
     // imagen cambia este valor y el navegador la vuelve a pedir.
-    versionAssets: "5df59146",
+    versionAssets: "16456793",
     // Hace lo mismo con los paquetes enlazados dinámicamente desde la tabla.
-    versionDownloads: "83d70749",
+    versionDownloads: "011c96f7",
     documento: {
       titulo: "Guía de artes · Swarovski",
       archivo: "Guia_Artes_Impresion_Swarovski_V1.xlsx",

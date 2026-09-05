@@ -1676,3 +1676,59 @@ button { cursor: pointer; background: none; border: 0; }
   .contact-form__label { font-size: var(--fs-md); }
   .aviso { font-size: var(--fs-sm); }
 }
+
+/* ============================================================================
+   24. GALERÍA DEL POP-UP
+   --------------------------------------------------------------------------
+   Algunas piezas tienen más de una foto (la vista de referencia y la del arte
+   aplicado). La celda sigue mostrando una sola miniatura —con un contador que
+   avisa cuántas hay— y el pop-up permite pasar entre ellas.
+   ========================================================================== */
+
+/* Contador sobre la miniatura de la tabla */
+.thumb { position: relative; }
+.thumb__contador {
+  position: absolute; inset-block-start: 4px; inset-inline-end: 4px;
+  min-inline-size: 18px; padding: 1px 5px;
+  font-size: 0.62rem; font-weight: 700; line-height: 1.5;
+  color: var(--color-accent-ink);
+  background: var(--color-accent);
+  border-radius: var(--radius-pill);
+  pointer-events: none;
+}
+.thumb__contador::before { content: "▣ "; font-size: .85em; }
+
+/* Controles bajo la imagen */
+.lightbox__nav {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  border-block-start: 1px solid var(--color-border);
+  background: var(--color-surface-solid);
+}
+.lightbox__nav[hidden] { display: none; }
+
+.lightbox__paso {
+  display: grid; place-items: center;
+  inline-size: 44px; block-size: 44px;
+  color: var(--color-text);
+  border: 1px solid var(--color-border-strong); border-radius: 50%;
+  transition: color var(--dur-fast) var(--ease-soft),
+              border-color var(--dur-fast) var(--ease-soft),
+              background-color var(--dur-fast) var(--ease-soft);
+}
+.lightbox__paso:hover {
+  color: var(--color-accent-ink);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+.lightbox__paso svg { inline-size: 20px; block-size: 20px; }
+
+.lightbox__contador {
+  min-inline-size: 4.5ch; text-align: center;
+  font-family: var(--font-mono); font-size: var(--fs-sm);
+  color: var(--color-text-muted); font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 860px) {
+  .thumb__contador { font-size: 0.72rem; }
+}

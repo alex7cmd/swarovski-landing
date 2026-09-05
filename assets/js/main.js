@@ -330,43 +330,76 @@
      el nombre exacto que debe tener el archivo. Al subirla aparece sola.
      ========================================================================== */
   var Lightbox = {
+    fotos: [],
+    indice: 0,
+
     init: function () {
       var self = this;
       this.$box = $("#lightbox");
       this.$frame = $("#lightboxFrame");
       this.$title = $("#lightboxTitle");
       this.$meta = $("#lightboxMeta");
+      this.$nav = $("#lightboxNav");
+      this.$contador = $("#lightboxContador");
 
       $(document).on("click", "[data-lightbox]", function () { self.abrir($(this)); });
       this.$box.on("click", "[data-close]", function () { self.cerrar(); });
+      this.$box.on("click", "[data-paso]", function () {
+        self.mover(parseInt($(this).data("paso"), 10));
+      });
+
       $(document).on("keydown", function (e) {
-        if (e.key === "Escape" && self.$box.hasClass("is-open")) { self.cerrar(); }
+        if (!self.$box.hasClass("is-open")) { return; }
+        if (e.key === "Escape") { self.cerrar(); }
+        if (e.key === "ArrowRight") { e.preventDefault(); self.mover(1); }
+        if (e.key === "ArrowLeft")  { e.preventDefault(); self.mover(-1); }
       });
     },
 
     abrir: function ($btn) {
-      var src = $btn.data("img"), self = this;
+      var galeria = $btn.data("galeria");
+
+      this.fotos = galeria ? String(galeria).split("|") : [$btn.data("img")];
+      this.indice = 0;
 
       this.$title.text($btn.data("titulo") || "Arte");
       this.$meta.text($btn.data("meta") || "");
+
+      // Los controles solo aparecen si de verdad hay más de una foto
+      this.$nav.attr("hidden", this.fotos.length < 2);
+
+      this.mostrar();
+
+      this.$box.attr("hidden", false).addClass("is-open");
+      $("body").addClass("is-locked");
+      this.$box.find(".lightbox__close").trigger("focus");
+    },
+
+    /** Avanza o retrocede dando la vuelta al llegar al extremo. */
+    mover: function (paso) {
+      if (this.fotos.length < 2) { return; }
+      this.indice = (this.indice + paso + this.fotos.length) % this.fotos.length;
+      this.mostrar();
+    },
+
+    mostrar: function () {
+      var self = this, src = this.fotos[this.indice];
+
+      this.$contador.text((this.indice + 1) + " / " + this.fotos.length);
       this.$frame.html('<p class="lightbox__loading">Cargando imagen…</p>');
 
-      $("<img>", { alt: $btn.data("titulo") || "" })
+      $("<img>", { alt: this.$title.text() })
         .on("load", function () { self.$frame.empty().append(this); })
         .on("error", function () {
           self.$frame.html(
             '<div class="lightbox__placeholder">' +
               '<svg aria-hidden="true"><use href="#i-image"></use></svg>' +
               "<p><b>Espacio reservado para la imagen</b></p>" +
-              "<p>Coloca el archivo en <code>" + Util.esc(src) + "</code> y aparecerá aquí automáticamente.</p>" +
+              "<p>Coloca el archivo en <code>" + Util.esc(src.split("?")[0]) + "</code> y aparecerá aquí automáticamente.</p>" +
             "</div>"
           );
         })
         .attr("src", src);
-
-      this.$box.attr("hidden", false).addClass("is-open");
-      $("body").addClass("is-locked");
-      this.$box.find(".lightbox__close").trigger("focus");
     },
 
     cerrar: function () {
@@ -481,12 +514,17 @@
       // Las versiones rompen la caché cuando se reemplaza una imagen o paquete.
       var v = this.data.versionAssets ? "?v=" + this.data.versionAssets : "",
           vd = this.data.versionDownloads ? "?v=" + this.data.versionDownloads : "",
-          // La tabla carga la miniatura (~15 KB); la foto completa solo se
-          // descarga si alguien abre el pop-up.
+          // `img` admite una cadena o una lista: con lista, el pop-up funciona
+          // como galería y se puede pasar de una foto a otra.
+          fotos = $.isArray(a.img) ? a.img : [a.img],
+          ruta = this.data.rutaImagenes || "",
+          // La tabla carga la miniatura (~15 KB); las fotos completas solo se
+          // descargan si alguien abre el pop-up.
           mini = a.mini
-            ? (this.data.rutaImagenes || "") + a.mini + v
-            : (this.data.rutaMiniaturas || "") + a.img.replace(/\.[^.]+$/, ".jpg") + v,
-          src = (this.data.rutaImagenes || "") + a.img + v,
+            ? ruta + a.mini + v
+            : (this.data.rutaMiniaturas || "") + fotos[0].replace(/\.[^.]+$/, ".jpg") + v,
+          galeria = $.map(fotos, function (f) { return ruta + f + v; }).join("|"),
+          src = ruta + fotos[0] + v,
           meta = a.posicion + " · " + a.ancho + " × " + a.alto + " · " + a.material,
           nombrePaquete = a.descarga ? a.descarga.split("/").pop() : "",
           archivoHtml = a.descarga
@@ -517,10 +555,12 @@
         '<td class="cell-thumb" data-label="Imagen">' +
           '<button type="button" class="thumb" data-lightbox' +
             ' data-img="' + Util.esc(src) + '"' +
+            ' data-galeria="' + Util.esc(galeria) + '"' +
             ' data-titulo="' + Util.esc(a.archivo) + '"' +
             ' data-meta="' + Util.esc(meta) + '">' +
             '<img class="thumb__img" src="' + Util.esc(mini) + '" alt="' + Util.esc(a.alt) + '" loading="eager" decoding="async">' +
             '<span class="thumb__ph"><svg aria-hidden="true"><use href="#i-image"></use></svg>Ver imagen</span>' +
+            (fotos.length > 1 ? '<span class="thumb__contador">' + fotos.length + "</span>" : "") +
           "</button>" +
         "</td>" +
         '<td class="is-left" data-label="Ubicación">' + Util.esc(a.ubicacion) + "</td>" +

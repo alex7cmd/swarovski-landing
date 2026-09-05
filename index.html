@@ -24,8 +24,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300;1,400&amp;family=Inter:wght@200;300;400;500;600;700;800&amp;display=swap">
 
-  <link rel="preload" href="assets/css/styles.css?v=cfdf78df" as="style">
-  <link rel="stylesheet" href="assets/css/styles.css?v=cfdf78df">
+  <link rel="preload" href="assets/css/styles.css?v=afa5f91a" as="style">
+  <link rel="stylesheet" href="assets/css/styles.css?v=afa5f91a">
 
   <!-- Tema antes del primer pintado: automático según la hora, como iOS/macOS -->
   <script>
@@ -102,6 +102,12 @@
     <symbol id="i-image" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-4.6-4.6a2 2 0 0 0-2.8 0L4 20"/>
     </symbol>
+    <symbol id="i-flecha-izq" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m15 18-6-6 6-6"/>
+    </symbol>
+    <symbol id="i-flecha-der" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m9 18 6-6-6-6"/>
+    </symbol>
     <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
     </symbol>
@@ -136,7 +142,7 @@
           <svg class="icon-moon" aria-hidden="true"><use href="#i-moon"></use></svg>
         </button>
 
-        <a class="btn btn--primary" href="assets/downloads/swarovski-impresos/all-resources.7z?v=061af12f"
+        <a class="btn btn--primary" href="assets/downloads/swarovski-impresos/all-resources.7z?v=e9437a33"
            data-download data-filename="all-resources.7z" data-label="Paquete de impresos"
              aria-label="Descargar recursos">
           <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
@@ -157,7 +163,7 @@
             <p class="eyebrow">Guía de producción gráfica</p>
 
             <div class="hero__actions">
-              <a class="btn btn--primary" href="assets/downloads/swarovski-impresos/all-resources.7z?v=061af12f"
+              <a class="btn btn--primary" href="assets/downloads/swarovski-impresos/all-resources.7z?v=e9437a33"
                  data-download data-filename="all-resources.7z" data-label="Paquete de impresos">
                 <svg class="btn__icon" aria-hidden="true"><use href="#i-download"></use></svg>
                 <span class="btn__label">Descargar recursos</span>
@@ -448,7 +454,7 @@
         <noscript>
           <p class="sheet-note">
             Esta guía se construye con JavaScript. Actívalo o descarga el
-            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=001ebcf1">CSV de la guía</a>.
+            <a href="assets/downloads/Guia_Artes_Swarovski.csv?v=d704a570">CSV de la guía</a>.
           </p>
         </noscript>
       </div>
@@ -589,6 +595,16 @@
         </button>
       </header>
       <div class="lightbox__frame" id="lightboxFrame"></div>
+
+      <div class="lightbox__nav" id="lightboxNav" hidden>
+        <button type="button" class="lightbox__paso" data-paso="-1" aria-label="Imagen anterior">
+          <svg aria-hidden="true"><use href="#i-flecha-izq"></use></svg>
+        </button>
+        <span class="lightbox__contador" id="lightboxContador">1 / 1</span>
+        <button type="button" class="lightbox__paso" data-paso="1" aria-label="Imagen siguiente">
+          <svg aria-hidden="true"><use href="#i-flecha-der"></use></svg>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -603,7 +619,7 @@
       '<script src="assets/vendor/jquery-3.7.1.min.js?v=2c872dbe"><\/script>'
     );
   </script>
-  <script src="assets/js/data.js?v=4a92e654"></script>
-  <script src="assets/js/main.js?v=63901511"></script>
+  <script src="assets/js/data.js?v=c5787caf"></script>
+  <script src="assets/js/main.js?v=68db67e6"></script>
 </body>
 </html>
